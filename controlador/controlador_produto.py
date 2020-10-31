@@ -7,6 +7,7 @@ class ControladorProduto(AbstractControlador):
     self.__produtos = []
     self.__tela_produto = TelaProduto(self)
     self.__tela_exibindo = True
+    self.__estoque = []
 
   def inicia(self):
     self.abre_tela_inicial()
@@ -15,7 +16,7 @@ class ControladorProduto(AbstractControlador):
     dados = self.__tela_produto.requisita_dados_cadastro()
     novo_produto = Produto(dados["codigo"],dados["nome"],dados["valor"],dados["quantidade"])
     self.__produtos.append(novo_produto)
-
+    self.__estoque.append(novo_produto)
 
   def remove(self):
     codigo = self.__tela_produto.requisita_dado_remover()
@@ -34,6 +35,7 @@ class ControladorProduto(AbstractControlador):
         produto.nome = dados["nome"]
         produto.valor = dados["valor"]
         produto.quantidade = dados["quantidade"]
+        self.__estoque.append(produto)
 
 
   def lista(self):
@@ -52,16 +54,12 @@ class ControladorProduto(AbstractControlador):
   def finaliza_tela(self):
     self.__tela_exibindo = False
 
-  def relatorio_estoque(self):
-    pass
-    #toda vez que um produto e cadastrado, ele entra no relatorio
-
   def atualiza_estoque(self):
     pass
     #toda vez que uma venda ocorrer, deve substrair do estoque a quantidade do produto vendido
     
   def imprime_relatorio(self):
-    pass
-    #imprimir o relatorio de estoque
-  
+    self.__tela_produto.imprime_estoque()
+    for produto in self.__estoque:
+      self.__tela_produto.mostra_dados_cadastrados(produto.codigo,produto.nome, produto.valor, produto.quantidade)
   
