@@ -9,7 +9,7 @@ class ControladorFuncionario(AbstractControlador):
     self.__funcionarios = []
     self.__tela_funcionario = TelaFuncionario()
     self.__controlador_principal = controlador
-    self.__controle = True
+    self.__exibe_tela = True
     self.__funcionario_logado = None
 
     self.__log_funcionario = False
@@ -93,8 +93,8 @@ class ControladorFuncionario(AbstractControlador):
     0: self.volta}
 
     self.limpa_tela()
-    self.__controle = True
-    while self.__controle:
+    self.__exibe_tela = True
+    while self.__exibe_tela:
 
       opcao_escolhida = self.__tela_funcionario.mostra_opcoes()
 
@@ -104,6 +104,6 @@ class ControladorFuncionario(AbstractControlador):
 
 
   def volta(self):
-    self.__controle = False
+    self.__exibe_tela = False
     self.limpa_tela()
     

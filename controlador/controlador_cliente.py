@@ -9,15 +9,11 @@ class ControladorCliente(AbstractControlador):
         self.__tela_cliente = TelaCliente()
         self.__controlador_principal = controlador
 
-        self.__controle = True
+        self.__exibe_tela = True
         self.__opcoes_controle = True
         self.__cliente_logado = None
         self.__log_cliente = True
         self.base_dados_cliente()
-
-    def inicia(self):
-        
-        self.abre_tela_inicial()
         
 
     def abre_tela_inicial(self):
@@ -25,8 +21,8 @@ class ControladorCliente(AbstractControlador):
         lista_opcoes = {1: self.login_cliente, 2: self.adiciona, 0: self.volta}
 
         #self.limpa_tela()
-        self.__controle = True
-        while self.__controle:
+        self.__exibe_tela = True
+        while self.__exibe_tela:
 
             opcao_escolhida = self.__tela_cliente.mostra_opcoes()
 
@@ -57,7 +53,7 @@ class ControladorCliente(AbstractControlador):
         self.__tela_cliente.avisos("cadastrar", "Cliente")
 
     def volta(self):
-        self.__controle = False
+        self.__exibe_tela = False
 
         self.limpa_tela()
 

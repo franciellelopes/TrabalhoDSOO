@@ -6,17 +6,16 @@ class ControladorProduto(AbstractControlador):
   def __init__(self):
     self.__produtos = []
     self.__tela_produto = TelaProduto(self)
-    self.__tela_exibindo = True
+    self.__exibe_tela = True
     self.__estoque = []
 
-  def inicia(self):
-    self.abre_tela_inicial()
 
   def adiciona(self):
     dados = self.__tela_produto.requisita_dados_cadastro()
     novo_produto = Produto(dados["codigo"],dados["nome"],dados["valor"],dados["quantidade"])
     self.__produtos.append(novo_produto)
     self.__estoque.append(novo_produto)
+
 
   def remove(self):
     codigo = self.__tela_produto.requisita_dado_remover()
@@ -25,6 +24,7 @@ class ControladorProduto(AbstractControlador):
         produto_remover = (produto)
         self.__produtos.remove(produto_remover)
         break
+      
 
   def atualiza(self):
     codigo = self.__tela_produto.requisita_dado_atualizar()
@@ -46,18 +46,21 @@ class ControladorProduto(AbstractControlador):
   def abre_tela_inicial(self):
     opcoes = {1: self.adiciona,2: self.remove,3: self.atualiza,4: self.lista,5: self.imprime_relatorio,0: self.finaliza_tela}
     
-    while self.__tela_exibindo:
+    while self.__exibe_tela:
       opcao = self.__tela_produto.mostra_opcoes()
       funcao = opcoes[opcao]
       funcao()
  
+ 
   def finaliza_tela(self):
-    self.__tela_exibindo = False
+    self.__exibe_tela = False
+
 
   def atualiza_estoque(self):
     pass
     #toda vez que uma venda ocorrer, deve substrair do estoque a quantidade do produto vendido
     
+
   def imprime_relatorio(self):
     self.__tela_produto.imprime_estoque()
     for produto in self.__estoque:

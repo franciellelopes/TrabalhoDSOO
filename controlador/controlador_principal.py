@@ -14,7 +14,7 @@ class ControladorPrincipal():
     #self.__controlador_carrinho = ControladorCarrinho()
   
     self.__tela_principal = TelaPrincipal(self)
-    self.__controle = True
+    self.__exibe_tela = True
 
   def inicia(self):
     self.__tela_principal.avisos("inicia", "")
@@ -24,22 +24,26 @@ class ControladorPrincipal():
   def mostra_tela_funcionario(self):
     self.__controlador_funcionario.abre_tela_inicial()
 
+
   def mostra_tela_cliente(self):
-    self.__controlador_cliente.inicia()
+    self.__controlador_cliente.abre_tela_inicial()
+
 
   def mostra_tela_produto(self):
-    self.__controlador_produto.inicia()
+    self.__controlador_produto.abre_tela_inicial()
+
 
   def mostra_tela_carrinho(self):
-    self.__controlador_carrinho.inicia()
+    self.__controlador_carrinho.abre_tela_inicial()
     
+
   def abre_tela_inicial(self):
     lista_opcoes = {
     1: self.mostra_tela_funcionario,
     2: self.mostra_tela_cliente, 
     0: self.fecha_sistema}
 
-    while self.__controle:
+    while self.__exibe_tela:
   
       opcao_escolhida = self.__tela_principal.mostra_opcoes()
       
@@ -48,6 +52,6 @@ class ControladorPrincipal():
       funcao_escolhida()
 
   def fecha_sistema(self):
-    self.__controle = False
+    self.__exibe_tela = False
     self.__tela_principal.avisos("finaliza", "")
   
