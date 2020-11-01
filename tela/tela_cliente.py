@@ -15,7 +15,7 @@ class TelaCliente(AbstractTela):
     print("Digite a sua senha")
     senha = input("")
 
-    return nome, cpf, senha
+    return str(nome), int(cpf), str(senha)
 
 
   def login(self):    

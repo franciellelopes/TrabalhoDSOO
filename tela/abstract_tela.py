@@ -18,12 +18,10 @@ class AbstractTela(ABC):
 
 
   def verifica_inteiro(self, entidade: str):
-    while True:
-      valor = input()
-      
+    while True:    
       try:
-        inteiro = int(valor)
-        if type(inteiro) != int:
+        valor = int(input())
+        if type(valor) != int:
           raise ValueError
 
         return valor

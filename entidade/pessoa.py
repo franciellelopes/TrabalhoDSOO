@@ -3,9 +3,13 @@ from abc import ABC, abstractmethod
 class Pessoa(ABC):
   @abstractmethod
   def __init__(self, nome: str, cpf: int, senha: str):
-    self.__nome = nome
-    self.__cpf = cpf
-    self.__senha = senha
+ 
+    if isinstance(nome, str):
+      self.__nome = nome
+    if isinstance(cpf, int):
+      self.__cpf = cpf
+    if isinstance(senha, str):
+      self.__senha = senha
 
 
   @property
@@ -29,7 +33,7 @@ class Pessoa(ABC):
 
 
   @property
-  def senha(self):
+  def senha(self) -> str:
     return self.__senha
 
 

@@ -9,9 +9,9 @@ class ControladorCliente(AbstractControlador):
         self.__tela_cliente = TelaCliente()
         self.__controlador_principal = controlador
 
-        self.__exibe_tela = True
-        self.__opcoes_controle = True
         self.__cliente_logado = None
+        
+        self.__exibe_tela = True
         self.__log_cliente = True
         self.base_dados_cliente()
         
@@ -34,13 +34,12 @@ class ControladorCliente(AbstractControlador):
         cpf, senha = self.__tela_cliente.login()
         encontrou = False
         for um_cliente in self.__clientes:
-           
-            if cpf == um_cliente.cpf and senha == um_cliente.senha:
-                self.__cliente_logado = um_cliente
-                self.cliente_opcoes(um_cliente.nome)
-                self.limpa_tela()
-                encontrou = True
-                break
+          if cpf == um_cliente.cpf and senha == um_cliente.senha:
+              self.__cliente_logado = um_cliente
+              self.cliente_opcoes(um_cliente.nome)
+              self.limpa_tela()
+              encontrou = True
+              break
             
         if not encontrou:
           self.__tela_cliente.avisos("dados_invalidos", "")
@@ -70,8 +69,7 @@ class ControladorCliente(AbstractControlador):
         self.__log_cliente = True
         while self.__log_cliente:
 
-            opcao_escolhida = self.__tela_cliente.tela_cliente_logado(
-                self.__cliente_logado.nome)
+            opcao_escolhida = self.__tela_cliente.tela_cliente_logado(self.__cliente_logado.nome)
 
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             self.limpa_tela()
@@ -125,11 +123,11 @@ class ControladorCliente(AbstractControlador):
             self.limpa_tela()
 
     def base_dados_cliente(self):
-        cliente = Cliente("Felix", 123, 123)
+        cliente = Cliente("Felix", 123, "123")
         self.__clientes.append(cliente)
 
-        cliente2 = Cliente("Dorival", 123456, 123654)
-        self.__clientes.append(cliente2)
+        cliente = Cliente("Dorival", 123456, "123654")
+        self.__clientes.append(cliente)
 
-        cliente3 = Cliente("Franciele", 321654, 456)
-        self.__clientes.append(cliente3)
+        cliente = Cliente("Franciele", 321654, "456")
+        self.__clientes.append(cliente)

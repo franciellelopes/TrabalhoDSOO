@@ -13,7 +13,7 @@ class ControladorFuncionario(AbstractControlador):
     self.__funcionario_logado = None
 
     self.__log_funcionario = False
-
+    self.base_dados_funcionario()
 
   def login_funcionario(self):
     cpf, senha = self.__tela_funcionario.login()
@@ -107,3 +107,13 @@ class ControladorFuncionario(AbstractControlador):
     self.__exibe_tela = False
     self.limpa_tela()
     
+
+  def base_dados_funcionario(self):
+    funcionario = Funcionario("Felix", 123, "123")
+    self.__funcionarios.append(funcionario)
+
+    funcionario = Funcionario("Dorival", 123456, "123654")
+    self.__funcionarios.append(funcionario)
+
+    funcionario = Funcionario("Franciele", 321654, "456")
+    self.__funcionarios.append(funcionario)
