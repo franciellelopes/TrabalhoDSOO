@@ -29,7 +29,7 @@ class TelaProduto(AbstractTela):
       print("Nome: ", nome)
       print("Valor: ", valor)
       print("Quantidade: ",quantidade)
-      print("")
+      print("-------------------------")
 
     def requisita_dado_remover(self):
       print("------REMOVER PRODUTO------")
@@ -46,6 +46,10 @@ class TelaProduto(AbstractTela):
       quantidade = int(input("Digite a nova quantidade: "))
 
       return {"nome": nome, "valor": valor, "quantidade": quantidade}
+
+    def imprime_estoque(self):
+      print("------ RELATORIO DO ESTOQUE------")
+      print("---------------------------------")
 
     def avisos(self):
       pass
