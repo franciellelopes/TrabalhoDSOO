@@ -1,5 +1,7 @@
+from tela.abstract_tela import AbstractTela
 
-class TelaPrincipal:
+
+class TelaPrincipal(AbstractTela):
     def __init__(self, controlador):
       self.__controlador = controlador
     def mostra_opcoes(self):

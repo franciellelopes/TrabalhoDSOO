@@ -1,5 +1,5 @@
-from produto import Produto
-from cliente import Cliente
+from entidade.produto import Produto
+from entidade.cliente import Cliente
 
 class Carrinho:
   
