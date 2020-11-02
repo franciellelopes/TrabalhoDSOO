@@ -65,6 +65,9 @@ class AbstractTela(ABC):
     elif opcao == "atualiza":
       print(entidade, "alterado com sucesso!")
 
+    elif opcao == "usuario_ja_cadastrado":
+      print(entidade, "já cadastrado")
+
 
   def finaliza_tela(self, entidade: str, nome: str):
     if entidade == "pessoa":

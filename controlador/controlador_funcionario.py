@@ -15,6 +15,7 @@ class ControladorFuncionario(AbstractControlador):
     self.__log_funcionario = False
     self.base_dados_funcionario()
 
+
   def login_funcionario(self):
     cpf, senha = self.__tela_funcionario.login()
     
@@ -28,10 +29,17 @@ class ControladorFuncionario(AbstractControlador):
 
   def adiciona(self):
     nome, cpf, senha = self.__tela_funcionario.dados_cadastro()
-    funcionario = Funcionario(nome, cpf, senha)
-    self.__funcionarios.append(funcionario)
-    self.limpa_tela()
-    self.__tela_funcionario.avisos("cadastrar", "Funcionário")
+
+    for funcionario in self.__funcionarios:
+      if cpf == funcionario.cpf:
+        self.__tela_funcionario.avisos("usuario_ja_cadastrado", "Funcionario")
+        break
+      else:
+        funcionario = Funcionario(nome, cpf, senha)
+        self.__funcionarios.append(funcionario)
+        self.limpa_tela()
+        self.__tela_funcionario.avisos("cadastrar", "Funcionário")
+        break
     
 
   def remove(self):
