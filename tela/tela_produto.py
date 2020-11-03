@@ -15,7 +15,9 @@ class TelaProduto(AbstractTela):
     
       opcao = self.le_numero_inteiro("Escolha a opcao: ", [1,2,3,4,5,0])
       return opcao
-
+    def comando_invalido(self):
+      print("Comando invalido")
+      
     def requisita_dados_cadastro(self):
       print("------ CADASTRAR PRODUTO------")
       codigo = int(input("Codigo do produto: "))
@@ -24,12 +26,16 @@ class TelaProduto(AbstractTela):
       quantidade = int(input("Quantidade do produto: "))
       return {"codigo": codigo, "nome": nome, "valor": valor, "quantidade": quantidade}
 
+    def comando_invalido(self):
+      print("Comando Invalido. Tente Novamente")
+
     def mostra_dados_cadastrados(self, codigo: int, nome: str, valor: float, quantidade: int):
+      print("---------------------------------")
       print("Codigo: ", codigo)
       print("Nome: ", nome)
       print("Valor: ", valor)
       print("Quantidade: ",quantidade)
-      print("-------------------------")
+      print("---------------------------------")
 
     def requisita_dado_remover(self):
       print("------REMOVER PRODUTO------")

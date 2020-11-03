@@ -54,4 +54,3 @@ class ControladorPrincipal():
   def fecha_sistema(self):
     self.__exibe_tela = False
     self.__tela_principal.avisos("finaliza", "")
-  

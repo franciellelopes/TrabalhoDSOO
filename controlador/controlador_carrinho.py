@@ -1,18 +1,17 @@
 from tela.tela_carrinho import TelaCarrinho
-from controlador.controlador_produto import ControladorProduto
 from controlador.abstract_controlador import AbstractControlador
+
+
 class ControladorCarrinho(AbstractControlador):
 
   def __init__(self):
     self.__tela_carrinho = TelaCarrinho(self)
     self.__carrinhos = []
     self.__exibe_tela = True
-    self.__controlador_produto = ControladorProduto(self)
-    
+
 
   def lista(self):
-    self.__controlador_produto.lista()
-
+    pass
 
   def lista_produtos_carrinho(self):
     for carrinho in self.__carrinhos:
@@ -20,10 +19,15 @@ class ControladorCarrinho(AbstractControlador):
 
 
   def adiciona(self):
-    codigo = self.__tela_carrinho.requisita_dado_adicionar() 
+    dados = self.__tela_carrinho.requisita_dado_adicionar() 
     for produto in self.__produtos:
-      if produto.codigo == codigo:
-        self.__carrinhos.append(produto)
+      if produto.codigo == dados["codigo"]:
+        if dados["quantidade"] <= produto.quantidade:
+          prod = Produto(produto.codigo,produto.nome,produto.valor,dados["quantidade"])
+        self.__carrinhos.append(prod)
+        break
+      else:
+        raise Exception
 
 
   def remove(self):
@@ -38,15 +42,25 @@ class ControladorCarrinho(AbstractControlador):
   def atualiza(self):
     dados = self.__tela_carrinho.requisita_dado_atualizar()
     for produto in self.__carrinhos:
-      if produto.codigo == dados.codigo:
-        produto.quantidade = dados["quantidade"]
+      if produto.codigo == dados["codigo"]:
+        for prod in self.__produtos:
+          if dados["quantidade"] <= prod.quantidade:
+            produto.quantidade = dados["quantidade"]
+            break
+          else:
+            raise Exception
 
-
-  def limpar_carrinho(self):
+  def limpa_carrinho(self):
     for produto in self.__carrinhos:
       self.__carrinhos.remove(produto)
     
-
+  def finaliza_compra(self):
+    self.valor_total()
+    for item in self__carrinhos:
+      for produto in self.__produtos:
+        if item.codigo == produto.codigo:
+          produto.quantidade -= item.quantidade
+          
   def valor_total(self):
     total = 0
     for produto in self.__carrinhos:

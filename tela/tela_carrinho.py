@@ -24,7 +24,9 @@ class TelaCarrinho(AbstractTela):
   def requisita_dado_adicionar(self):
     print("------ ADICIONAR PRODUTO NO CARRINHO------")
     codigo = int(input("Codigo do produto: "))
-    return {"codigo": codigo}
+    quantidade = int(input("Quantidade: "))
+    return {"codigo": codigo, "quantidade": quantidade}
+   
 
   def mostra_produtos_adicionados(self, codigo: int, nome: str, valor: float, quantidade: int):
     print("Codigo: ", codigo)
