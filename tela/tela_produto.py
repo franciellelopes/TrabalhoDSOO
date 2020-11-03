@@ -20,7 +20,7 @@ class TelaProduto(AbstractTela):
       
     def requisita_dados_cadastro(self):
       print("------ CADASTRAR PRODUTO------")
-      codigo = int(input("Codigo do produto: "))
+      codigo = self.le_numero_inteiro("Codigo do produto: ", [])
       nome = input("Nome do produto: ")
       valor = float(input("Valor do produto: "))
       quantidade = int(input("Quantidade do produto: "))

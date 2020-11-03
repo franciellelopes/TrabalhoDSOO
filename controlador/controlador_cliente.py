@@ -10,7 +10,8 @@ class ControladorCliente(AbstractControlador):
     self.__tela_cliente = TelaCliente()
     self.__controlador_principal = controlador
     self.__cliente_logado = None
-    
+    self._lista_compras = []
+
     self.__exibe_tela = True
     self.__log_cliente = True
     self.base_dados_cliente()

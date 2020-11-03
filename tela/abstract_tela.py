@@ -10,7 +10,7 @@ class AbstractTela(ABC):
       valor_lido = input(mensagem)
       try:
         inteiro = int(valor_lido)
-        if inteiro not in opcoes_validas:
+        if len( opcoes_validas) > 0 and inteiro not in opcoes_validas:
           raise ValueError
         return inteiro
       except ValueError:

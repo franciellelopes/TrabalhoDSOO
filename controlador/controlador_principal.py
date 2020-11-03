@@ -16,13 +16,15 @@ class ControladorPrincipal():
     self.__tela_principal = TelaPrincipal(self)
     self.__exibe_tela = True
 
+
+  @property
+  def controlador_produto(self):
+    return self.__controlador_produto
+
+
   def inicia(self):
     self.__tela_principal.avisos("inicia", "")
     self.abre_tela_inicial()
-
-
-  def acessa_produtos(self):
-    self.__controlador_produto.lista()
 
 
   def mostra_tela_funcionario(self):

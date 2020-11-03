@@ -55,7 +55,6 @@ class ControladorFuncionario(AbstractControlador):
 
   def ver_estoque(self):
       self.__controlador_principal.mostra_tela_produto()
-    
 
 
   def ver_cadastro(self):

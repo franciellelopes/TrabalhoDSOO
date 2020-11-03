@@ -5,7 +5,7 @@ from controlador.abstract_controlador import AbstractControlador
 class ControladorCarrinho(AbstractControlador):
 
   def __init__(self, controlador):
-    self.controlador_principal = controlador
+    self.__controlador_principal = controlador
     self.__tela_carrinho = TelaCarrinho(self)
     self.__carrinhos = []
     self.__exibe_tela = True
@@ -13,7 +13,7 @@ class ControladorCarrinho(AbstractControlador):
 
 
   def lista(self):
-    self.controlador_principal.acessa_produtos()
+    self.__controlador_principal.controlador_produtos.lista()
     
 
   def lista_produtos_carrinho(self):
@@ -59,7 +59,7 @@ class ControladorCarrinho(AbstractControlador):
     
   def finaliza_compra(self):
     self.valor_total()
-    for item in self__carrinhos:
+    for item in self.__carrinhos:
       for produto in self.__produtos:
         if item.codigo == produto.codigo:
           produto.quantidade -= item.quantidade
@@ -78,7 +78,7 @@ class ControladorCarrinho(AbstractControlador):
   def abre_tela_inicial(self):
     opcoes = {1: self.lista,2: self.adiciona,3: self.remove,4: self.atualiza,5: self.limpa_carrinho,6: self.lista_produtos_carrinho, 7: self.valor_total,0: self.finaliza_tela}
 
-
+    self.__exibe_tela = True
     while self.__exibe_tela:
       opcao = self.__tela_carrinho.mostra_opcoes()
       funcao = opcoes[opcao]
