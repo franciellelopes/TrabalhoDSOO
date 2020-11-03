@@ -11,7 +11,7 @@ class ControladorPrincipal():
     self.__controlador_cliente = ControladorCliente(self)
     self.__controlador_funcionario = ControladorFuncionario(self)
     self.__controlador_produto = ControladorProduto()
-    #self.__controlador_carrinho = ControladorCarrinho()
+    self.__controlador_carrinho = ControladorCarrinho(self)
   
     self.__tela_principal = TelaPrincipal(self)
     self.__exibe_tela = True
@@ -19,6 +19,10 @@ class ControladorPrincipal():
   def inicia(self):
     self.__tela_principal.avisos("inicia", "")
     self.abre_tela_inicial()
+
+
+  def acessa_produtos(self):
+    self.__controlador_produto.lista()
 
 
   def mostra_tela_funcionario(self):

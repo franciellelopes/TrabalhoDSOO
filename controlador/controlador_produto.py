@@ -8,6 +8,7 @@ class ControladorProduto(AbstractControlador):
     self.__tela_produto = TelaProduto(self)
     self.__exibe_tela = True
     self.__estoque = []
+    self.base_dados_produto()
 
 
   def adiciona(self):
@@ -72,3 +73,9 @@ class ControladorProduto(AbstractControlador):
     for produto in self.__estoque:
       self.__tela_produto.mostra_dados_cadastrados(produto.codigo,produto.nome, produto.valor, produto.quantidade)
   
+
+  def base_dados_produto(self):
+    produto = Produto(123, "Carrinho", 50, 3)
+    self.__produtos.append(produto)
+    produto = Produto(456, "Boneca", 30, 5)
+    self.__produtos.append(produto)

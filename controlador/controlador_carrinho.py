@@ -4,14 +4,17 @@ from controlador.abstract_controlador import AbstractControlador
 
 class ControladorCarrinho(AbstractControlador):
 
-  def __init__(self):
+  def __init__(self, controlador):
+    self.controlador_principal = controlador
     self.__tela_carrinho = TelaCarrinho(self)
     self.__carrinhos = []
     self.__exibe_tela = True
+    self.__produtos = []
 
 
   def lista(self):
-    pass
+    self.controlador_principal.acessa_produtos()
+    
 
   def lista_produtos_carrinho(self):
     for carrinho in self.__carrinhos:

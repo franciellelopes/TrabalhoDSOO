@@ -2,7 +2,6 @@ from controlador.abstract_controlador import AbstractControlador
 from entidade.cliente import Cliente
 from tela.tela_cliente import TelaCliente
 
-from controlador.controlador_carrinho import ControladorCarrinho
 
 
 class ControladorCliente(AbstractControlador):
@@ -10,7 +9,6 @@ class ControladorCliente(AbstractControlador):
     self.__clientes = []
     self.__tela_cliente = TelaCliente()
     self.__controlador_principal = controlador
-    self.__controlador_carrinho = ControladorCarrinho()
     self.__cliente_logado = None
     
     self.__exibe_tela = True
@@ -88,7 +86,7 @@ class ControladorCliente(AbstractControlador):
 
 
   def compra(self):
-    self.__controlador_carrinho.abre_tela_inicial()
+    self.__controlador_principal.mostra_tela_carrinho()
 
 
   def ver_cadastro(self):
