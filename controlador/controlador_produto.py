@@ -12,39 +12,29 @@ class ControladorProduto(AbstractControlador):
 
 
   def adiciona(self):
-    try:
-      dados = self.__tela_produto.requisita_dados_cadastro()
-      novo_produto = Produto(dados["codigo"],dados["nome"],dados["valor"],dados["quantidade"])
-      self.__produtos.append(novo_produto)
-      self.__estoque.append(novo_produto)
-    except Exception:
-      return self.__tela_produto.comando_invalido()
+    dados = self.__tela_produto.requisita_dados_cadastro()
+    novo_produto = Produto(dados["codigo"],dados["nome"],dados["valor"],dados["quantidade"])
+    self.__produtos.append(novo_produto)
+    self.__estoque.append(novo_produto)
 
   def remove(self):
-    try:
-      codigo = self.__tela_produto.requisita_dado_remover()
-      for produto in self.__produtos:
-        if produto.codigo == codigo:
-          produto_remover = (produto)
-          self.__produtos.remove(produto_remover)
-          break
-    except Exception:
-      return self.__tela_produto.comando_invalido()
-      
+    codigo = self.__tela_produto.requisita_dado_remover()
+    for produto in self.__produtos:
+      if produto.codigo == codigo:
+        produto_remover = (produto)
+        self.__produtos.remove(produto_remover)
+        break
 
   def atualiza(self):
-    try:
-      codigo = self.__tela_produto.requisita_dado_atualizar()
-      for produto in self.__produtos:
-        if produto.codigo == codigo: 
-          dados = self.__tela_produto.atualiza_produto()
-          produto.nome = dados["nome"]
-          produto.valor = dados["valor"]
-          produto.quantidade = dados["quantidade"]
-          self.__estoque.append(produto)
-          break
-    except Exception:
-      return self.__tela_produto.comando_invalido()
+    codigo = self.__tela_produto.requisita_dado_atualizar()
+    for produto in self.__produtos:
+      if produto.codigo == codigo: 
+        dados = self.__tela_produto.atualiza_produto()
+        produto.nome = dados["nome"]
+        produto.valor = dados["valor"]
+        produto.quantidade = dados["quantidade"]
+        self.__estoque.append(produto)
+        break
 
   def lista(self):
     for produto in self.__produtos:
@@ -58,7 +48,6 @@ class ControladorProduto(AbstractControlador):
       opcao = self.__tela_produto.mostra_opcoes()
       funcao = opcoes[opcao]
       funcao()
- 
  
   def finaliza_tela(self):
     self.__exibe_tela = False

@@ -11,7 +11,6 @@ class ControladorFuncionario(AbstractControlador):
     self.__controlador_principal = controlador
     self.__exibe_tela = True
     self.__funcionario_logado = None
-
     self.__log_funcionario = False
     self.base_dados_funcionario()
 

@@ -11,15 +11,12 @@ class ControladorCarrinho(AbstractControlador):
     self.__exibe_tela = True
     self.__produtos = []
 
-
   def lista(self):
     self.__controlador_principal.controlador_produtos.lista()
     
-
   def lista_produtos_carrinho(self):
     for carrinho in self.__carrinhos:
       self.__tela_carrinho.__mostra_produtos_adicionados(carrinho.codigo, carrinho.nome, carrinho.valor, carrinho.quantidade)
-
 
   def adiciona(self):
     dados = self.__tela_carrinho.requisita_dado_adicionar() 
@@ -32,7 +29,6 @@ class ControladorCarrinho(AbstractControlador):
       else:
         raise Exception
 
-
   def remove(self):
     codigo = self.__tela_carrinho.requisita_dado_remover()
     for produto in self.__carrinhos:
@@ -40,7 +36,6 @@ class ControladorCarrinho(AbstractControlador):
         produto_remover = (produto)
         self.__carrinhos.remove(produto_remover)
         break
-
 
   def atualiza(self):
     dados = self.__tela_carrinho.requisita_dado_atualizar()

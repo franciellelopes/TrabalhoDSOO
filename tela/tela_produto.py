@@ -15,15 +15,15 @@ class TelaProduto(AbstractTela):
     
       opcao = self.le_numero_inteiro("Escolha a opcao: ", [1,2,3,4,5,0])
       return opcao
-    def comando_invalido(self):
-      print("Comando invalido")
       
     def requisita_dados_cadastro(self):
       print("------ CADASTRAR PRODUTO------")
       codigo = self.le_numero_inteiro("Codigo do produto: ", [])
-      nome = input("Nome do produto: ")
-      valor = float(input("Valor do produto: "))
-      quantidade = int(input("Quantidade do produto: "))
+      print("Nome do produto: ")
+      nome = self.verifica_palavra()
+      print("Valor do produto: ")
+      valor = self.verifica_float()      
+      quantidade = self.le_numero_inteiro("Quantidade do produto: ", [])
       return {"codigo": codigo, "nome": nome, "valor": valor, "quantidade": quantidade}
 
     def comando_invalido(self):
@@ -39,18 +39,18 @@ class TelaProduto(AbstractTela):
 
     def requisita_dado_remover(self):
       print("------REMOVER PRODUTO------")
-      codigo = int(input("Digite o codigo do produto que deseja remover: "))
+      codigo = self.le_numero_inteiro("Digite o codigo do produto que deseja remover: ", [])
       return codigo
 
     def requisita_dado_atualizar(self):
       print("------ATUALIZAR PRODUTO------")
-      codigo = int(input("Digite o codigo do produto que deseja atualizar: "))
+      codigo = self.le_numero_inteiro("Digite o codigo do produto que deseja atualizar: ", [])
       return codigo
-    def atualiza_produto(self):
-      nome = input("Digite o novo nome: ")
-      valor = float(input("Digite o novo valor: "))
-      quantidade = int(input("Digite a nova quantidade: "))
 
+    def atualiza_produto(self):
+      nome = self.verifica_palavra("Digite o novo nome: ")
+      valor = self.verifica_float("Digite o novo valor: ")
+      quantidade = self.le_numero_inteiro("Digite a nova quantidade: ", [])
       return {"nome": nome, "valor": valor, "quantidade": quantidade}
 
     def imprime_estoque(self):

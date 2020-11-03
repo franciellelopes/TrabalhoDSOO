@@ -28,6 +28,17 @@ class AbstractTela(ABC):
       except ValueError:
         print(entidade ,"deve ser composto apenas de números inteiros!")
 
+  def verifica_float(self):
+    while True:
+      try:
+        valor = float(input())
+        if type(valor) != float:
+          raise ValueError
+        else:
+          return valor
+      except ValueError:
+          print("Digite apenas numeros")
+        
 
   def verifica_palavra(self):
     while True:
