@@ -20,7 +20,10 @@ class TelaCarrinho(AbstractTela):
     
     opcao = self.le_numero_inteiro("Escolha a opcao: ", [1,2,3,4,5,6,7,0])
     return opcao
-
+  def quantidade_insuficiente(self):
+    print("Quantidade insuficiente.")
+    quantidade = self.le_numero_inteiro(" Digite outro valor", [])
+    
   def requisita_dados_adicionar(self):
     print("------ ADICIONAR PRODUTO NO CARRINHO------")
     codigo = self.le_numero_inteiro("Codigo do produto: ", [])
