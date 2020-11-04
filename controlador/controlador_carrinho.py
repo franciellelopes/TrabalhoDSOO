@@ -33,8 +33,7 @@ class ControladorCarrinho(AbstractControlador):
     codigo = self.__tela_carrinho.requisita_dado_remover()
     for produto in self.__carrinhos:
       if produto.codigo == codigo:
-        produto_remover = (produto)
-        self.__carrinhos.remove(produto_remover)
+        self.__carrinhos.remove(produto)
         break
 
   def atualiza(self):
