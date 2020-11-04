@@ -7,49 +7,63 @@ class TelaFuncionario(AbstractTela):
 
 
   def dados_cadastro(self):
-      print("Digite seu nome:")
-      nome = self.verifica_palavra()
+    print("Digite seu nome:")
+    nome = self.verifica_palavra()
 
-      print("Digite seu cpf")
-      cpf = self.verifica_inteiro("O CPF")
+    cpf = self.le_numero_inteiro("Digite seu cpf:  ", "")
 
-      print("Digite a sua senha")
-      senha = input("")
+    print("Digite a sua senha")
+    senha = input("")
 
-      return nome, cpf, senha
+    return nome, cpf, senha
 
 
   def login(self):
-    print("Digite seu CPF")
-    cpf = self.verifica_inteiro("O CPF")
+    cpf = self.le_numero_inteiro("Digite seu cpf:  ", "")
+
     print("Digite sua senha")
     senha = input()
 
     return cpf, senha
 
 
+  def tela_atualiza_cadastro(self):
+    print("O que você quer alterar?")
+    print("1 - Nome")
+    print("2 - Senha")
+    
+    opcao = self.le_numero_inteiro("Escolha a opcao: ", [1, 2])
+    if opcao == 1:
+      print("Digite seu novo nome: ")
+      dado = self.verifica_palavra()
+
+    elif opcao == 2:
+      print("Digite sua nova senha:")
+      dado = input()
+
+    return opcao, dado
+
+
   def tela_remove(self):
-    print("Digite seu CPF:")
-    cpf = self.verifica_inteiro("O CPF")
+    cpf = self.le_numero_inteiro("Digite seu cpf:  ", "")
+
     print("Digite sua senha:")
     senha = input("")
 
-    print("Tem certeza que deseja remover o cadastro?")
-    print("1 - Sim")
-    print("2 - Não")
-    opcao = self.le_numero_inteiro("Escolha a opcao: ", [1, 2])
+    opcao = self.confirma_tela("remover_cadastro", "")
 
     if opcao == 1:
       return cpf, senha
     elif opcao == 2:
       return 0, 0
 
-  
+
   def tela_mostra_cadastro(self, nome, cpf, senha):
+    print("--------------------------------------------")
     print("Nome:", nome.lower().capitalize())
     print("CPF:", cpf)
     print("Senha:", senha)
-    print("")
+    print("--------------------------------------------")
 
 
   def tela_funcionario_logado(self, nome_funcionario: str):

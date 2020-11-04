@@ -4,6 +4,7 @@ class TelaProduto(AbstractTela):
     def __init__(self, controlador_produto):
       self.__controle = controlador_produto
 
+
     def mostra_opcoes(self): 
       print("------ PRODUTO ------")
       print("1 - Adicionar Produto")
@@ -15,7 +16,8 @@ class TelaProduto(AbstractTela):
     
       opcao = self.le_numero_inteiro("Escolha a opcao: ", [1,2,3,4,5,0])
       return opcao
-      
+
+
     def requisita_dados_cadastro(self):
       print("------ CADASTRAR PRODUTO------")
       codigo = self.le_numero_inteiro("Codigo do produto: ", [])
@@ -26,6 +28,7 @@ class TelaProduto(AbstractTela):
       quantidade = self.le_numero_inteiro("Quantidade do produto: ", [])
       return {"codigo": codigo, "nome": nome, "valor": valor, "quantidade": quantidade}
 
+
     def mostra_dados_cadastrados(self, codigo: int, nome: str, valor: float, quantidade: int):
       print("---------------------------------")
       print("Codigo: ", codigo)
@@ -34,15 +37,18 @@ class TelaProduto(AbstractTela):
       print("Quantidade: ",quantidade)
       print("---------------------------------")
 
+
     def requisita_dado_remover(self):
       print("------REMOVER PRODUTO------")
       codigo = self.le_numero_inteiro("Digite o codigo do produto que deseja remover: ", [])
       return codigo
 
+
     def requisita_dado_atualizar(self):
       print("------ATUALIZAR PRODUTO------")
       codigo = self.le_numero_inteiro("Digite o codigo do produto que deseja atualizar: ", [])
       return codigo
+
 
     def atualiza_produto(self):
       print("Digite o novo nome: ")
@@ -52,9 +58,7 @@ class TelaProduto(AbstractTela):
       quantidade = self.le_numero_inteiro("Digite a nova quantidade: ", [])
       return {"nome": nome, "valor": valor, "quantidade": quantidade}
 
+
     def imprime_estoque(self):
       print("------ RELATORIO DO ESTOQUE------")
       print("---------------------------------")
-
-    def avisos(self):
-      pass

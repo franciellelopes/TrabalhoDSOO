@@ -8,35 +8,41 @@ class ControladorFuncionario(AbstractControlador):
   def __init__(self, controlador):
     self.__funcionarios = []
     self.__tela_funcionario = TelaFuncionario()
-    self.__controlador_principal = controlador
-    self.__exibe_tela = True
+    self.__controlador_principal = controlador    
     self.__funcionario_logado = None
+
+    self.__exibe_tela = True    
     self.__log_funcionario = False
     self.base_dados_funcionario()
 
 
   def login_funcionario(self):
     cpf, senha = self.__tela_funcionario.login()
+    encontrou = False
     
     for um_funcionario in self.__funcionarios:
       if cpf == um_funcionario.cpf and senha == um_funcionario.senha:
         self.__funcionario_logado = um_funcionario
-        self.funcionario_opcoes(um_funcionario.nome) 
-      else:
-        self.__tela_funcionario.avisos("dados_invalidos", "")
+        self.funcionario_opcoes(um_funcionario.nome)
+        self.limpa_tela()
+        encontrou = True
+        break
+
+    if not encontrou:
+      self.__tela_funcionario.avisos("dados_invalidos", "")
+
 
 
   def adiciona(self):
     nome, cpf, senha = self.__tela_funcionario.dados_cadastro()
-
-    for funcionario in self.__funcionarios:
-      if cpf == funcionario.cpf:
+    self.limpa_tela()
+    for um_funcionario in self.__funcionarios:
+      if cpf == um_funcionario.cpf:
         self.__tela_funcionario.avisos("usuario_ja_cadastrado", "Funcionario")
         break
       else:
-        funcionario = Funcionario(nome, cpf, senha)
-        self.__funcionarios.append(funcionario)
-        self.limpa_tela()
+        um_funcionario = Funcionario(nome, cpf, senha)
+        self.__funcionarios.append(um_funcionario)
         self.__tela_funcionario.avisos("cadastrar", "Funcionário")
         break
     
@@ -53,7 +59,8 @@ class ControladorFuncionario(AbstractControlador):
 
 
   def ver_estoque(self):
-      self.__controlador_principal.mostra_tela_produto()
+    self.limpa_tela()
+    self.__controlador_principal.mostra_tela_produto()
 
 
   def ver_cadastro(self):
@@ -65,11 +72,25 @@ class ControladorFuncionario(AbstractControlador):
 
 
   def atualiza(self):
-    pass
+    opcao, dado = self.__tela_funcionario.tela_atualiza_cadastro()
+    self.limpa_tela()
+    if opcao == 1:
+      self.__funcionario_logado.nome = dado
+      self.__tela_funcionario.avisos("atualiza", "Nome")
+    elif opcao == 2:
+      self.__funcionario_logado.senha = dado
+      self.__tela_funcionario.avisos("atualiza", "Senha")
+
+    for um_funcionario in self.__funcionarios:
+      if self.__funcionario_logado.cpf == um_funcionario:
+          self.__funcionarios[um_funcionario] = self.__funcionario_logado
+
+          break
+
 
 
   def desloga(self):
-    opcao = self.__tela_funcionario.finaliza_tela("pessoa", self.__funcionario_logado.nome)
+    opcao = self.__tela_funcionario.confirma_tela("pessoa", self.__funcionario_logado.nome)
     if opcao == 1:
       self.__log_funcionario = False
       self.limpa_tela()
@@ -85,6 +106,7 @@ class ControladorFuncionario(AbstractControlador):
     
     self.__log_funcionario = True
     self.limpa_tela()
+
     while self.__log_funcionario:
       opcao_escolhida = self.__tela_funcionario.tela_funcionario_logado(funcionario)
       funcao_escolhida = lista_opcoes[opcao_escolhida]
@@ -100,6 +122,7 @@ class ControladorFuncionario(AbstractControlador):
 
     self.limpa_tela()
     self.__exibe_tela = True
+
     while self.__exibe_tela:
 
       opcao_escolhida = self.__tela_funcionario.mostra_opcoes()

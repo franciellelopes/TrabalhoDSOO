@@ -9,8 +9,8 @@ class TelaCliente(AbstractTela):
     print("Digite seu nome:")
     nome = self.verifica_palavra()
 
-    print("Digite seu CPF")
-    cpf = self.verifica_inteiro("O CPF")
+    #print("Digite seu CPF")
+    cpf = self.le_numero_inteiro("Digite seu cpf: ", [])
 
     print("Digite a sua senha")
     senha = input("")
@@ -19,8 +19,7 @@ class TelaCliente(AbstractTela):
 
 
   def login(self):    
-    print("Digite seu CPF:")
-    cpf = self.verifica_inteiro("O CPF")
+    cpf = self.le_numero_inteiro("Digite seu cpf: ", [])
     print("Digite sua senha:")
     senha = input()
 
@@ -28,15 +27,12 @@ class TelaCliente(AbstractTela):
 
 
   def tela_remove(self):
-    print("Digite seu CPF:")
-    cpf = self.verifica_inteiro("O CPF")
+    cpf = self.le_numero_inteiro("Digite seu cpf: ", []) 
+
     print("Digite sua senha:")
     senha = input("")
 
-    print("Tem certeza que deseja remover o cadastro?")
-    print("1 - Sim")
-    print("2 - Não")
-    opcao = self.le_numero_inteiro("Escolha a opcao: ", [1, 2])
+    opcao = self.confirma_tela("remover_cadastro", "")
 
     if opcao == 1:
       return cpf, senha
@@ -63,11 +59,12 @@ class TelaCliente(AbstractTela):
     return opcao, dado
     
 
-  def tela_mostra_cadastro(self, nome, cpf, senha):
+  def tela_mostra_cadastro(self, nome, cpf, senha):    
+    print("--------------------------------------------")
     print("Nome:", nome.lower().capitalize())
     print("CPF:", cpf)
     print("Senha:", senha)
-    print("")
+    print("--------------------------------------------")
 
 
   def tela_cliente_logado(self, nome_cliente: str):

@@ -17,11 +17,11 @@ class ControladorCliente(AbstractControlador):
       
 
   def abre_tela_inicial(self):
-
     lista_opcoes = {1: self.login_cliente, 2: self.adiciona, 0: self.volta}
 
     self.limpa_tela()
     self.__exibe_tela = True
+
     while self.__exibe_tela:
 
         opcao_escolhida = self.__tela_cliente.mostra_opcoes()
@@ -48,6 +48,7 @@ class ControladorCliente(AbstractControlador):
 
   def adiciona(self):
     nome, cpf, senha = self.__tela_cliente.dados_cadastro()
+    self.limpa_tela()
     for cliente in self.__clientes:
       if cliente.cpf == cpf:
         self.__tela_cliente.avisos("usuario_ja_cadastrado", "Cliente")
@@ -55,7 +56,6 @@ class ControladorCliente(AbstractControlador):
       else:
         cliente = Cliente(nome, cpf, senha)
         self.__clientes.append(cliente)
-        self.limpa_tela()
         self.__tela_cliente.avisos("cadastrar", "Cliente")
         break
 
@@ -128,7 +128,7 @@ class ControladorCliente(AbstractControlador):
 
   def desloga(self):
     self.limpa_tela()
-    opcao = self.__tela_cliente.finaliza_tela("pessoa",self.__cliente_logado.nome,)
+    opcao = self.__tela_cliente.confirma_tela("pessoa",self.__cliente_logado.nome,)
     if opcao == 1:
         self.__log_cliente = False
         self.limpa_tela()

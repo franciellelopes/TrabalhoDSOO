@@ -10,23 +10,12 @@ class AbstractTela(ABC):
       valor_lido = input(mensagem)
       try:
         inteiro = int(valor_lido)
-        if len( opcoes_validas) > 0 and inteiro not in opcoes_validas:
+        if len(opcoes_validas) > 0 and inteiro not in opcoes_validas:
           raise ValueError
         return inteiro
       except ValueError:
         print("Digite uma opção válida!")
 
-
-  def verifica_inteiro(self, entidade: str):
-    while True:    
-      try:
-        valor = int(input())
-        if type(valor) != int:
-          raise ValueError
-
-        return valor
-      except ValueError:
-        print(entidade ,"deve ser composto apenas de números inteiros!")
 
   def verifica_float(self):
     while True:
@@ -64,12 +53,16 @@ class AbstractTela(ABC):
   def avisos(self, opcao: str, entidade: str):
     if opcao == "cadastrar":
       print(entidade, "cadastrado com sucesso!")
+
     elif opcao == "remover":
       print(entidade, "removido com sucesso!")
+
     elif opcao == "dados_invalidos":
       print("Erro! Digite o cpf ou a senha corretamente!")
+
     elif opcao == "finaliza":
       print("Sistema Encerrado!")
+
     elif opcao == "inicia":
       print("Bem vindo a loja de brinquedos!")
 
@@ -80,7 +73,7 @@ class AbstractTela(ABC):
       print(entidade, "já cadastrado")
 
 
-  def finaliza_tela(self, entidade: str, nome: str):
+  def confirma_tela(self, entidade: str, nome: str):
     if entidade == "pessoa":
       print(nome.lower().capitalize(), "tem certeza que deseja sair da sua conta?")
 
@@ -92,6 +85,9 @@ class AbstractTela(ABC):
 
     elif entidade == "volta":
       print("Tem certeza que deseja voltar?")
+
+    elif entidade == "remove_cadastro":
+      print("Tem certeza que deseja remover o cadastro?")
 
     print("1 - Sim")
     print("2 - Não")
