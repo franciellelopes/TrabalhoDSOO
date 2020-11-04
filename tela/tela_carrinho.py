@@ -21,10 +21,10 @@ class TelaCarrinho(AbstractTela):
     opcao = self.le_numero_inteiro("Escolha a opcao: ", [1,2,3,4,5,6,7,0])
     return opcao
 
-  def requisita_dado_adicionar(self):
+  def requisita_dados_adicionar(self):
     print("------ ADICIONAR PRODUTO NO CARRINHO------")
-    codigo = int(input("Codigo do produto: "))
-    quantidade = int(input("Quantidade: "))
+    codigo = self.le_numero_inteiro("Codigo do produto: ", [])
+    quantidade = self.le_numero_inteiro("Quantidade: ",[])
     return {"codigo": codigo, "quantidade": quantidade}
    
 
@@ -36,7 +36,7 @@ class TelaCarrinho(AbstractTela):
 
   def requisita_dado_remover(self):
     print("------REMOVER PRODUTO DO CARRINHO------")
-    codigo = int(input("Digite o codigo do produto: "))
+    codigo = self.le_numero_inteiro("Digite o codigo do produto: ", [])
     return {"codigo": codigo}
 
   def total_valor_carrinho(self, total: float):
@@ -44,9 +44,8 @@ class TelaCarrinho(AbstractTela):
 
   def requisita_dado_atualizar(self):
     print("------ATUALIZAR QUANTIDADE DO PRODUTO------")
-    codigo = int(input("Digite o codigo do produto que deseja atualizar a quantidade: "))
-    quantidade = int(input("Digite a quantidade do produto que deseja atualizar: "))
-  
+    codigo = self.le_numero_inteiro("Digite o codigo do produto que deseja atualizar a quantidade: ",[])
+    quantidade = self.le_numero_inteiro("Digite a quantidade do produto que deseja atualizar: ", [])
     return {"codigo": codigo, "quantidade": quantidade}
 
   def avisos(self):

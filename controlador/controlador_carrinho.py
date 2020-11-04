@@ -9,7 +9,6 @@ class ControladorCarrinho(AbstractControlador):
     self.__tela_carrinho = TelaCarrinho(self)
     self.__carrinhos = []
     self.__exibe_tela = True
-    self.__produtos = []
 
   def lista(self):
     self.limpa_tela()
@@ -20,8 +19,8 @@ class ControladorCarrinho(AbstractControlador):
       self.__tela_carrinho.__mostra_produtos_adicionados(carrinho.codigo, carrinho.nome, carrinho.valor, carrinho.quantidade)
 
   def adiciona(self):
-    dados = self.__tela_carrinho.requisita_dado_adicionar() 
-    for produto in self.__produtos:
+    dados = self.__tela_carrinho.requisita_dados_adicionar() 
+    for produto in :
       if produto.codigo == dados["codigo"]:
         if dados["quantidade"] <= produto.quantidade:
           prod = Produto(produto.codigo,produto.nome,produto.valor,dados["quantidade"])
@@ -56,7 +55,7 @@ class ControladorCarrinho(AbstractControlador):
   def finaliza_compra(self):
     self.valor_total()
     for item in self.__carrinhos:
-      for produto in self.__produtos:
+      for produto in self.__controlador_principal.controlador_produto.self.__produtos:
         if item.codigo == produto.codigo:
           produto.quantidade -= item.quantidade
           
@@ -69,7 +68,6 @@ class ControladorCarrinho(AbstractControlador):
 
   def finaliza_tela(self):
     self.__exibe_tela = False
-
 
   def abre_tela_inicial(self):
     opcoes = {1: self.lista,2: self.adiciona,3: self.remove,4: self.atualiza,5: self.limpa_carrinho,6: self.lista_produtos_carrinho, 7: self.valor_total,0: self.finaliza_tela}

@@ -26,9 +26,6 @@ class TelaProduto(AbstractTela):
       quantidade = self.le_numero_inteiro("Quantidade do produto: ", [])
       return {"codigo": codigo, "nome": nome, "valor": valor, "quantidade": quantidade}
 
-    def comando_invalido(self):
-      print("Comando Invalido. Tente Novamente")
-
     def mostra_dados_cadastrados(self, codigo: int, nome: str, valor: float, quantidade: int):
       print("---------------------------------")
       print("Codigo: ", codigo)
@@ -48,8 +45,10 @@ class TelaProduto(AbstractTela):
       return codigo
 
     def atualiza_produto(self):
-      nome = self.verifica_palavra("Digite o novo nome: ")
-      valor = self.verifica_float("Digite o novo valor: ")
+      print("Digite o novo nome: ")
+      nome = self.verifica_palavra()
+      print("Digite o novo valor: ")
+      valor = self.verifica_float()
       quantidade = self.le_numero_inteiro("Digite a nova quantidade: ", [])
       return {"nome": nome, "valor": valor, "quantidade": quantidade}
 

@@ -10,7 +10,6 @@ class ControladorProduto(AbstractControlador):
     self.__estoque = []
     self.base_dados_produto()
 
-
   def adiciona(self):
     dados = self.__tela_produto.requisita_dados_cadastro()
     novo_produto = Produto(dados["codigo"],dados["nome"],dados["valor"],dados["quantidade"])
