@@ -47,7 +47,11 @@ class TelaCarrinho(AbstractTela):
     codigo = self.le_numero_inteiro("Digite o codigo do produto: ", [])
     return {"codigo": codigo}
 
-
+  def digite_codigo_valido(self):
+    print("---------------------------------------")
+    print("Digite um codigo valido")
+    print("---------------------------------------")
+    
   def total_valor_carrinho(self, total: float):
     print("---------------------------------------")
     print("Valor total a pagar: ", total)

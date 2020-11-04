@@ -21,31 +21,43 @@ class ControladorCarrinho(AbstractControlador):
         self.__tela_carrinho.mostra_produtos_adicionados(produto.codigo, produto.nome, produto.valor,produto.quantidade)
 
   def adiciona(self):
-    dados = self.__tela_carrinho.requisita_dados_adicionar() 
+    existe = False
+    dados = self.__tela_carrinho.requisita_dados_adicionar()
     for produto in self.__controlador_principal.controlador_produto.produtos:
       if produto.codigo == dados["codigo"]:
+        existe = True
         if dados["quantidade"] <= produto.quantidade:
           produto_novo = Produto(produto.codigo, produto.nome, produto.valor,dados["quantidade"])
           produto.quantidade -= dados["quantidade"]
-          self.__lista_produtos_compra.append(produto_novo)    
+          self.__lista_produtos_compra.append(produto_novo)   
           break
         else:
           self.__tela_carrinho.quantidade_insuficiente()
+    if not existe:
+      self.__tela_carrinho.digite_codigo_valido()
+      self.adiciona() 
 
   def remove(self):
+    existe = False
     codigo = self.__tela_carrinho.requisita_dado_remover()
     for produto in self.__lista_produtos_compra:
       if produto.codigo == codigo["codigo"]:
+        existe = True
         for prod in self.__controlador_principal.controlador_produto.produtos:
           if prod.codigo == produto.codigo:
             prod.quantidade += produto.quantidade
             self.__lista_produtos_compra.remove(produto)
             break
+    if not existe:
+      self.__tela_carrinho.digite_codigo_valido()
+      self.remove()
 
   def atualiza(self):
+    existe = False
     dados = self.__tela_carrinho.requisita_dado_atualizar()
     for produto in self.__lista_produtos_compra:
       if produto.codigo == dados["codigo"]:
+        existe = True
         for prod in self.__controlador_principal.controlador_produto.produtos:
           if produto.codigo == prod.codigo:
             if dados["quantidade"] < produto.quantidade:
@@ -56,7 +68,10 @@ class ControladorCarrinho(AbstractControlador):
               prod.quantidade = dados["quantidade"] - (prod.quantidade + produto.quantidade) 
             else:
               self.__tela_carrinho.quantidade_insuficiente()
-
+    if not existe:
+      self.__tela_carrinho.digite_codigo_valido()
+      self.atualiza()
+      
   def limpa_carrinho(self):
     self.limpa_tela()
     for produto in self.__lista_produtos_compra:
