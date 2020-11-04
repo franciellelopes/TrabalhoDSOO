@@ -17,6 +17,7 @@ class ControladorProduto(AbstractControlador):
     self.__produtos.append(novo_produto)
     self.__estoque.append(novo_produto)
 
+
   def remove(self):
     codigo = self.__tela_produto.requisita_dado_remover()
     for produto in self.__produtos:
@@ -24,6 +25,7 @@ class ControladorProduto(AbstractControlador):
         produto_remover = (produto)
         self.__produtos.remove(produto_remover)
         break
+
 
   def atualiza(self):
     codigo = self.__tela_produto.requisita_dado_atualizar()
@@ -36,6 +38,7 @@ class ControladorProduto(AbstractControlador):
         self.__estoque.append(produto)
         break
 
+
   def lista(self):
     for produto in self.__produtos:
       self.__tela_produto.mostra_dados_cadastrados(produto.codigo,produto.nome, produto.valor, produto.quantidade)
@@ -44,12 +47,16 @@ class ControladorProduto(AbstractControlador):
   def abre_tela_inicial(self):
     opcoes = {1: self.adiciona,2: self.remove,3: self.atualiza,4: self.lista,5: self.imprime_relatorio,0: self.finaliza_tela}
     
+    self.limpa_tela()
+    self.__exibe_tela = True
     while self.__exibe_tela:
       opcao = self.__tela_produto.mostra_opcoes()
       funcao = opcoes[opcao]
       funcao()
  
+
   def finaliza_tela(self):
+    self.limpa_tela()
     self.__exibe_tela = False
 
 
@@ -66,5 +73,6 @@ class ControladorProduto(AbstractControlador):
   def base_dados_produto(self):
     produto = Produto(123, "Carrinho", 50, 3)
     self.__produtos.append(produto)
+
     produto = Produto(456, "Boneca", 30, 5)
     self.__produtos.append(produto)

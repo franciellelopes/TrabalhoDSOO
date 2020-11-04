@@ -12,7 +12,8 @@ class ControladorCarrinho(AbstractControlador):
     self.__produtos = []
 
   def lista(self):
-    self.__controlador_principal.controlador_produtos.lista()
+    self.limpa_tela()
+    self.__controlador_principal.controlador_produto.lista()
     
   def lista_produtos_carrinho(self):
     for carrinho in self.__carrinhos:
