@@ -8,6 +8,7 @@ class ControladorCarrinho(AbstractControlador):
     self.__controlador_principal = controlador
     self.__tela_carrinho = TelaCarrinho(self)
     self.__carrinhos = []
+    self.__lista_produtos_compra = []
     self.__exibe_tela = True
 
   def lista(self):
@@ -15,17 +16,20 @@ class ControladorCarrinho(AbstractControlador):
     self.__controlador_principal.controlador_produto.lista()
     
   def lista_produtos_carrinho(self):
+    for produto in self.__lista_produtos_compra:
+      print(produto.nome)
+      print(produto.codigo)
     for carrinho in self.__carrinhos:
       self.__tela_carrinho.__mostra_produtos_adicionados(carrinho.codigo, carrinho.nome, carrinho.valor, carrinho.quantidade)
 
   def adiciona(self):
     dados = self.__tela_carrinho.requisita_dados_adicionar() 
-    for produto in :
+    for produto in self.__controlador_principal.controlador_produto.produtos:
+
       if produto.codigo == dados["codigo"]:
         if dados["quantidade"] <= produto.quantidade:
-          prod = Produto(produto.codigo,produto.nome,produto.valor,dados["quantidade"])
-        self.__carrinhos.append(prod)
-        break
+          self.__lista_produtos_compra.append(produto)        
+          break
       else:
         raise Exception
 
