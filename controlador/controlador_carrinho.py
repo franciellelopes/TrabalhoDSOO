@@ -16,6 +16,7 @@ class ControladorCarrinho(AbstractControlador):
     self.__controlador_principal.controlador_produto.lista()
     
   def lista_produtos_carrinho(self):
+    self.limpa_tela()
     for produto in self.__lista_produtos_compra:
         self.__tela_carrinho.mostra_produtos_adicionados(produto.codigo, produto.nome, produto.valor,produto.quantidade)
 
@@ -25,6 +26,7 @@ class ControladorCarrinho(AbstractControlador):
       if produto.codigo == dados["codigo"]:
         if dados["quantidade"] <= produto.quantidade:
           produto_novo = Produto(produto.codigo, produto.nome, produto.valor,dados["quantidade"])
+          produto.quantidade -= dados["quantidade"]
           self.__lista_produtos_compra.append(produto_novo)    
           break
         else:
@@ -34,35 +36,42 @@ class ControladorCarrinho(AbstractControlador):
     codigo = self.__tela_carrinho.requisita_dado_remover()
     for produto in self.__lista_produtos_compra:
       if produto.codigo == codigo["codigo"]:
-        self.__lista_produtos_compra.remove(produto)
-        break
+        for prod in self.__controlador_principal.controlador_produto.produtos:
+          if prod.codigo == produto.codigo:
+            prod.quantidade += produto.quantidade
+            self.__lista_produtos_compra.remove(produto)
+            break
 
   def atualiza(self):
     dados = self.__tela_carrinho.requisita_dado_atualizar()
     for produto in self.__lista_produtos_compra:
       if produto.codigo == dados["codigo"]:
         for prod in self.__controlador_principal.controlador_produto.produtos:
-          if dados["quantidade"] <= prod.quantidade:
-            produto.quantidade = dados["quantidade"]
-            break
-          else:
-            self.__tela_carrinho.quantidade_insuficiente()
+          if produto.codigo == prod.codigo:
+            if dados["quantidade"] < produto.quantidade:
+              prod.quantidade += (produto.quantidade - dados["quantidade"])
+              produto.quantidade = dados["quantidade"]
+              break
+            elif dados["quantidade"] == (prod.quantidade + produto.quantidade):
+              prod.quantidade = dados["quantidade"] - (prod.quantidade + produto.quantidade) 
+            else:
+              self.__tela_carrinho.quantidade_insuficiente()
 
   def limpa_carrinho(self):
+    self.limpa_tela()
+    for produto in self.__lista_produtos_compra:
+      for prod in self.__controlador_principal.controlador_produto.produtos:
+        if produto.codigo == prod.codigo:
+          prod.quantidade += produto.quantidade
+          
     self.__lista_produtos_compra.clear()
     
-  def finaliza_compra(self):
-    self.valor_total()
-    for item in self.__carrinhos:
-      for produto in self.__controlador_principal.controlador_produto.produtos:
-        if item.codigo == produto.codigo:
-          produto.quantidade -= item.quantidade
-          
+
   def valor_total(self):
+    self.limpa_tela()
     total = 0
     for produto in self.__lista_produtos_compra:
-      valor = produto.valor
-      total += valor
+      total += produto.valor * produto.quantidade
     self.__tela_carrinho.total_valor_carrinho(total)
 
   def finaliza_tela(self):

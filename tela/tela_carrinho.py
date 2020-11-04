@@ -25,7 +25,7 @@ class TelaCarrinho(AbstractTela):
 
   def quantidade_insuficiente(self):
     print("Quantidade insuficiente.")
-    quantidade = self.le_numero_inteiro(" Digite outro valor", [])
+    quantidade = self.le_numero_inteiro(" Digite outro valor: ", [])
 
   
   def requisita_dados_adicionar(self):
@@ -49,8 +49,11 @@ class TelaCarrinho(AbstractTela):
 
 
   def total_valor_carrinho(self, total: float):
+    print("---------------------------------------")
     print("Valor total a pagar: ", total)
-
+    print("---------------------------------------")
+    print("Compra Finalizada com Sucesso")
+    print("---------------------------------------")
 
   def requisita_dado_atualizar(self):
     print("------ATUALIZAR QUANTIDADE DO PRODUTO------")
