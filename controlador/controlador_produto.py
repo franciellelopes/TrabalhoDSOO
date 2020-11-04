@@ -17,9 +17,18 @@ class ControladorProduto(AbstractControlador):
 
   def adiciona(self):
     dados = self.__tela_produto.requisita_dados_cadastro()
-    novo_produto = Produto(dados["codigo"],dados["nome"],dados["valor"],dados["quantidade"])
-    self.__produtos.append(novo_produto)
-    self.__estoque.append(novo_produto)
+    ja_existe = False
+    for produto in self.produtos:
+      if dados["codigo"] == produto.codigo:
+        ja_existe = True
+        break
+    if not ja_existe:
+      novo_produto = Produto(dados["codigo"],dados["nome"],dados["valor"],dados["quantidade"])
+      self.__produtos.append(novo_produto)
+      self.__estoque.append(novo_produto)
+    else:
+      self.__tela_produto.produto_ja_existe()
+      self.adiciona()
 
 
   def remove(self):

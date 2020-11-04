@@ -16,6 +16,10 @@ class TelaProduto(AbstractTela):
     
       opcao = self.le_numero_inteiro("Escolha a opcao: ", [1,2,3,4,5,0])
       return opcao
+    def produto_ja_existe(self):
+      print("------------------------------")
+      print("Ja existe um produto com esse codigo")
+      print("------------------------------")
 
 
     def requisita_dados_cadastro(self):
