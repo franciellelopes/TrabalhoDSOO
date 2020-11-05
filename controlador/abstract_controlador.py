@@ -2,9 +2,19 @@ from abc import ABC, abstractmethod
 import os
 
 class AbstractControlador(ABC):
+  @abstractmethod
   def __init__(self):
     self.__exibe_tela = True
-    
+
+
+  @abstractmethod
+  def abre_tela_inicial(self):
+    pass
+
+
+  @abstractmethod
+  def finaliza_tela(self):
+    pass
 
   @abstractmethod
   def adiciona(self):

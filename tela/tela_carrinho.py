@@ -41,16 +41,6 @@ class TelaCarrinho(AbstractTela):
     return {"codigo": codigo}
 
 
-  def digite_codigo_valido(self):
-    print("---------------------------------------")
-    print("Digite um codigo valido")
-    print("---------------------------------------")
-
-
-  def total_valor_carrinho(self, total: float):
-    print("Valor total a pagar: ", total, "\n")
-
-
   def requisita_dado_atualizar(self):
     print("------ATUALIZAR QUANTIDADE DO PRODUTO------")
     codigo = self.le_numero_inteiro("Digite o codigo do produto que deseja atualizar a quantidade: ",[])
@@ -75,3 +65,8 @@ class TelaCarrinho(AbstractTela):
 
     elif opcao == "quantidade_insuficiente":
       print("Quantidade insuficiente no estoque!")
+
+    elif opcao == "codigo_invalido":
+      print("---------------------------------------")
+      print("Digite um codigo valido")
+      print("---------------------------------------")

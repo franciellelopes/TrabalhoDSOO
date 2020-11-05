@@ -50,6 +50,7 @@ class AbstractTela(ABC):
   def mostra_opcoes(self):
     pass
 
+
   @abstractmethod
   def avisos(self, opcao: str, entidade: str):
     pass

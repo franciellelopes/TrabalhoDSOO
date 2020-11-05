@@ -124,7 +124,7 @@ class ControladorFuncionario(AbstractControlador):
     lista_opcoes = {
     1: self.login_funcionario,
     2: self.adiciona, 
-    0: self.volta}
+    0: self.finaliza_tela}
 
     self.limpa_tela()
     self.__exibe_tela = True
@@ -138,7 +138,7 @@ class ControladorFuncionario(AbstractControlador):
       funcao_escolhida()
 
 
-  def volta(self):
+  def finaliza_tela(self):
     self.__exibe_tela = False
     self.limpa_tela()
     

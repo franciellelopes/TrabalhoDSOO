@@ -51,7 +51,7 @@ class ControladorCarrinho(AbstractControlador):
           self.__tela_carrinho.avisos("quantidade_insuficiente", "")
 
       elif not existe:
-        self.__tela_carrinho.digite_codigo_valido()
+        self.__tela_carrinho.avisos("codigo_invalido", "")
 
 
   def remove(self):
