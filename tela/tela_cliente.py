@@ -6,22 +6,19 @@ class TelaCliente(AbstractTela):
 
 
   def dados_cadastro(self):
-    print("Digite seu nome:")
-    nome = self.verifica_palavra()
+    nome = self.verifica_palavra("Digite seu nome: ")
 
-    #print("Digite seu CPF")
     cpf = self.le_numero_inteiro("Digite seu cpf: ", [])
 
-    print("Digite a sua senha")
-    senha = input("")
+    senha = input("Digite sua senha: ")
 
     return str(nome), int(cpf), str(senha)
 
 
   def login(self):    
     cpf = self.le_numero_inteiro("Digite seu cpf: ", [])
-    print("Digite sua senha:")
-    senha = input()
+
+    senha = input("Digite sua senha: ")
 
     return cpf, senha
 
@@ -29,10 +26,9 @@ class TelaCliente(AbstractTela):
   def tela_remove(self):
     cpf = self.le_numero_inteiro("Digite seu cpf: ", []) 
 
-    print("Digite sua senha:")
-    senha = input("")
+    senha = input("Digite sua senha: ")
 
-    opcao = self.confirma_tela("remover_cadastro", "")
+    opcao = self.confirma_tela("remove_cadastro", "")
 
     if opcao == 1:
       return cpf, senha
@@ -41,7 +37,7 @@ class TelaCliente(AbstractTela):
 
 
   def tela_atualiza_cadastro(self):
-    print("O que você quer alterar?")
+    print("O que você deseja alterar?")
     print("1 - Nome")
     print("2 - Senha")
     print("0 - Voltar")
@@ -49,12 +45,10 @@ class TelaCliente(AbstractTela):
     opcao = self.le_numero_inteiro("Escolha a opcao: ", [1, 2, 0])
 
     if opcao == 1:
-      print("Digite seu novo nome: ")
-      dado = self.verifica_palavra()
+      dado = self.verifica_palavra("Digite seu novo nome: ")
 
     elif opcao == 2:
-      print("Digite sua nova senha:")
-      dado = input()
+      dado = input("Digite sua nova senha: ")
 
     return opcao, dado
     
@@ -65,6 +59,7 @@ class TelaCliente(AbstractTela):
     print("CPF:", cpf)
     print("Senha:", senha)
     print("--------------------------------------------")
+    print("")
 
 
   def tela_cliente_logado(self, nome_cliente: str):
@@ -73,9 +68,10 @@ class TelaCliente(AbstractTela):
     print("2 - Ver Cadastro")
     print("3 - Alterar Cadastro")
     print("4 - Remover Cadastro")
+    print("5 - Notas Fiscais")
     print("0 - Sair")
 
-    opcao = self.le_numero_inteiro("Escolha a opcao: ", [1, 2, 3, 4, 0])
+    opcao = self.le_numero_inteiro("Escolha a opcao: ", [1, 2, 3, 4, 5, 0])
     return opcao
 
 

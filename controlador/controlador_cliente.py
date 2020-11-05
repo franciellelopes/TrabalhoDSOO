@@ -10,25 +10,28 @@ class ControladorCliente(AbstractControlador):
     self.__tela_cliente = TelaCliente()
     self.__controlador_principal = controlador
     self.__cliente_logado = None
-    self._lista_compras = []
-    self.__exibe_tela = True
+
     self.__log_cliente = True
+
     self.base_dados_cliente()
       
 
   def abre_tela_inicial(self):
-    lista_opcoes = {1: self.login_cliente, 2: self.adiciona, 0: self.volta}
-
+    lista_opcoes = {
+    1: self.login_cliente,
+    2: self.adiciona,
+    0: self.volta}
+    
     self.limpa_tela()
     self.__exibe_tela = True
 
     while self.__exibe_tela:
 
-        opcao_escolhida = self.__tela_cliente.mostra_opcoes()
+      opcao_escolhida = self.__tela_cliente.mostra_opcoes()
 
-        funcao_escolhida = lista_opcoes[opcao_escolhida]
+      funcao_escolhida = lista_opcoes[opcao_escolhida]
 
-        funcao_escolhida()
+      funcao_escolhida()
 
 
   def login_cliente(self):
@@ -48,7 +51,6 @@ class ControladorCliente(AbstractControlador):
 
   def adiciona(self):
     nome, cpf, senha = self.__tela_cliente.dados_cadastro()
-    self.limpa_tela()
     for cliente in self.__clientes:
       if cliente.cpf == cpf:
         self.__tela_cliente.avisos("usuario_ja_cadastrado", "Cliente")
@@ -71,6 +73,7 @@ class ControladorCliente(AbstractControlador):
         2: self.ver_cadastro,
         3: self.atualiza,
         4: self.remove,
+        5: self.lista_nota_fiscal,
         0: self.desloga
     }
 
@@ -81,11 +84,12 @@ class ControladorCliente(AbstractControlador):
         opcao_escolhida = self.__tela_cliente.tela_cliente_logado(self.__cliente_logado.nome)
 
         funcao_escolhida = lista_opcoes[opcao_escolhida]
-        self.limpa_tela()
+
         funcao_escolhida()
 
 
   def compra(self):
+    self.limpa_tela()
     self.__controlador_principal.mostra_tela_carrinho()
 
 
@@ -116,14 +120,27 @@ class ControladorCliente(AbstractControlador):
   def remove(self):
     cpf, senha = self.__tela_cliente.tela_remove()
     for um_cliente in self.__clientes:
-        if cpf != um_cliente.cpf or senha != um_cliente.senha:
-            self.__tela_cliente.avisos("dados_invalidos", "")
-        elif cpf == um_cliente.cpf and senha == um_cliente.senha:
-            self.__clientes.remove(um_cliente)
-            self.limpa_tela()
-            self.__tela_cliente.avisos("remover", "cliente")
-            self.__log_cliente = False
-            break
+      if cpf == um_cliente.cpf and senha == um_cliente.senha:
+        self.limpa_tela()
+        self.__clientes.remove(um_cliente)
+        
+        self.__tela_cliente.avisos("remover", "cliente")
+        self.__log_cliente = False
+        break
+
+      elif cpf == 0 and senha == 0:
+        self.__tela_cliente.avisos("operacao_cancelada", "")
+        break
+
+      elif cpf != um_cliente.cpf or senha != um_cliente.senha:
+        self.__tela_cliente.avisos("dados_invalidos", "")
+        break
+
+
+  def lista_nota_fiscal(self):
+    for nota_fiscal in self.__cliente_logado.notas_fiscais:
+      self.__controlador_principal.nota_fiscal.mostra_nota()
+
 
 
   def desloga(self):
@@ -135,11 +152,21 @@ class ControladorCliente(AbstractControlador):
 
 
   def base_dados_cliente(self):
-      cliente = Cliente("Felix", 123, "123")
+      cliente = Cliente("Lucas", 123, "123")
       self.__clientes.append(cliente)
 
-      cliente = Cliente("Dorival", 123456, "123654")
+      cliente = Cliente("Jade", 123456, "123654")
       self.__clientes.append(cliente)
 
-      cliente = Cliente("Franciele", 321654, "456")
+      cliente = Cliente("Mariana", 321654, "456")
       self.__clientes.append(cliente)
+
+
+  @property
+  def clientes(self):
+    return self.__clientes
+
+
+  @property
+  def cliente_logado(self):
+    return self.__cliente_logado

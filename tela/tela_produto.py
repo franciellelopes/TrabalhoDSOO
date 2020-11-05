@@ -16,19 +16,16 @@ class TelaProduto(AbstractTela):
     
       opcao = self.le_numero_inteiro("Escolha a opcao: ", [1,2,3,4,5,0])
       return opcao
-    def produto_ja_existe(self):
-      print("------------------------------")
-      print("Ja existe um produto com esse codigo")
-      print("------------------------------")
 
 
     def requisita_dados_cadastro(self):
       print("------ CADASTRAR PRODUTO------")
       codigo = self.le_numero_inteiro("Codigo do produto: ", [])
-      print("Nome do produto: ")
-      nome = self.verifica_palavra()
-      print("Valor do produto: ")
-      valor = self.verifica_float()      
+
+      nome = self.verifica_palavra("Nome do produto: ")
+
+      valor = self.verifica_float("Valor do produto: ")  
+          
       quantidade = self.le_numero_inteiro("Quantidade do produto: ", [])
       return {"codigo": codigo, "nome": nome, "valor": valor, "quantidade": quantidade}
 
@@ -55,10 +52,11 @@ class TelaProduto(AbstractTela):
 
 
     def atualiza_produto(self):
-      print("Digite o novo nome: ")
-      nome = self.verifica_palavra()
-      print("Digite o novo valor: ")
-      valor = self.verifica_float()
+
+      nome = self.verifica_palavra("Digite o novo nome: ")
+
+      valor = self.verifica_float("Digite o novo valor: ")
+
       quantidade = self.le_numero_inteiro("Digite a nova quantidade: ", [])
       return {"nome": nome, "valor": valor, "quantidade": quantidade}
 

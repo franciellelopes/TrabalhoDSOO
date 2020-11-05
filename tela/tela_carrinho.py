@@ -1,5 +1,3 @@
-from entidade.produto import Produto
-from entidade.carrinho import Carrinho
 from tela.abstract_tela import AbstractTela
 
 class TelaCarrinho(AbstractTela):
@@ -23,11 +21,6 @@ class TelaCarrinho(AbstractTela):
     return opcao
 
 
-  def quantidade_insuficiente(self):
-    print("Quantidade insuficiente.")
-    quantidade = self.le_numero_inteiro(" Digite outro valor: ", [])
-
-  
   def requisita_dados_adicionar(self):
     print("------ ADICIONAR PRODUTO NO CARRINHO------")
     codigo = self.le_numero_inteiro("Codigo do produto: ", [])
@@ -47,17 +40,16 @@ class TelaCarrinho(AbstractTela):
     codigo = self.le_numero_inteiro("Digite o codigo do produto: ", [])
     return {"codigo": codigo}
 
+
   def digite_codigo_valido(self):
     print("---------------------------------------")
     print("Digite um codigo valido")
     print("---------------------------------------")
-    
+
+
   def total_valor_carrinho(self, total: float):
-    print("---------------------------------------")
-    print("Valor total a pagar: ", total)
-    print("---------------------------------------")
-    print("Compra Finalizada com Sucesso")
-    print("---------------------------------------")
+    print("Valor total a pagar: ", total, "\n")
+
 
   def requisita_dado_atualizar(self):
     print("------ATUALIZAR QUANTIDADE DO PRODUTO------")

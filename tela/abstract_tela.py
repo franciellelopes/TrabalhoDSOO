@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import os
 
 class AbstractTela(ABC):
   @abstractmethod
@@ -17,10 +18,10 @@ class AbstractTela(ABC):
         print("Digite uma opção válida!")
 
 
-  def verifica_float(self):
+  def verifica_float(self, mensagem):
     while True:
       try:
-        valor = float(input())
+        valor = float(input(mensagem))
         if type(valor) != float:
           raise ValueError
         else:
@@ -29,9 +30,9 @@ class AbstractTela(ABC):
           print("Digite apenas numeros")
         
 
-  def verifica_palavra(self):
+  def verifica_palavra(self, mensagem):
     while True:
-      valor = input()
+      valor = input(mensagem)
       
       try:
         ha_numero = any(char.isdigit() for char in valor)
@@ -51,29 +52,55 @@ class AbstractTela(ABC):
 
 
   def avisos(self, opcao: str, entidade: str):
+    os.system('cls' if os.name == 'nt' else 'clear')
     if opcao == "cadastrar":
-      print(entidade, "cadastrado com sucesso!")
+      print(entidade, "cadastrado com sucesso!", "\n")
 
     elif opcao == "remover":
-      print(entidade, "removido com sucesso!")
+      print(entidade, "removido com sucesso!", "\n")
 
     elif opcao == "dados_invalidos":
-      print("Erro! Digite o cpf ou a senha corretamente!")
+      print("Erro! Digite o cpf ou a senha corretamente!", "\n")
 
     elif opcao == "finaliza":
       print("Sistema Encerrado!")
 
     elif opcao == "inicia":
-      print("Bem vindo a loja de brinquedos!")
+      print("Bem vindo a loja de brinquedos!", "\n")
 
     elif opcao == "atualiza":
-      print(entidade, "alterado com sucesso!")
+      print(entidade, "alterado com sucesso!", "\n")
 
     elif opcao == "usuario_ja_cadastrado":
-      print(entidade, "já cadastrado")
+      print(entidade, "já cadastrado", "\n")
 
+    elif opcao == "operacao_cancelada":
+      print("Operação cancelada!", "\n")
+
+    elif opcao == "compra_finalizada":
+      print("Compra finalizada com sucesso!", "\n")
+    
+    elif opcao == "compra_cancelada":
+      print("Compra cancelada!", "\n")
+
+    elif opcao == "carrinho_vazio":
+      print("Não há produtos no carrinho!", "\n")
+
+    elif opcao == "quantidade_insuficiente":
+      print("Quantidade insuficiente no estoque!")
+
+    elif opcao == "produto_ja_cadastrado":
+      print("Produto já cadastrado!", "\n")
+
+    elif opcao == "produto_adicionado":
+      print("Produto adicionado ao carrinho!", "\n")
+
+    elif opcao == "produto_cadastrado":
+      print("Produto cadastrado com sucesso!", "\n")
 
   def confirma_tela(self, entidade: str, nome: str):
+    os.system('cls' if os.name == 'nt' else 'clear')
+
     if entidade == "pessoa":
       print(nome.lower().capitalize(), "tem certeza que deseja sair da sua conta?")
 
@@ -89,8 +116,12 @@ class AbstractTela(ABC):
     elif entidade == "remove_cadastro":
       print("Tem certeza que deseja remover o cadastro?")
 
+    elif entidade == "finaliza_compra":
+      print("Tem certeza que deseja finalizar a compra de", nome, "R$?" )
+
     print("1 - Sim")
     print("2 - Não")
+
     opcao = self.le_numero_inteiro("", [1, 2])
 
     return opcao

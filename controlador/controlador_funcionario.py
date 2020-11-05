@@ -11,7 +11,6 @@ class ControladorFuncionario(AbstractControlador):
     self.__controlador_principal = controlador    
     self.__funcionario_logado = None
 
-    self.__exibe_tela = True    
     self.__log_funcionario = False
     self.base_dados_funcionario()
 
@@ -29,8 +28,8 @@ class ControladorFuncionario(AbstractControlador):
         break
 
     if not encontrou:
+      self.limpa_tela()
       self.__tela_funcionario.avisos("dados_invalidos", "")
-
 
 
   def adiciona(self):
@@ -50,11 +49,19 @@ class ControladorFuncionario(AbstractControlador):
   def remove(self):
     cpf, senha = self.__tela_funcionario.tela_remove()
     for um_funcionario in self.__funcionarios:
+
       if cpf == um_funcionario.cpf and senha == um_funcionario.senha:
         self.__funcionarios.remove(um_funcionario)
-        self.limpa_tela()
         self.__tela_funcionario.avisos("remover", "Funcionario")
         self.__log_funcionario = False
+        break
+
+      elif cpf == 0 and senha == 0:
+        self.__tela_funcionario.avisos("operacao_cancelada", "")
+        break
+
+      elif cpf != um_funcionario.cpf or senha != um_funcionario.senha:
+        self.__tela_funcionario.avisos("dados_invalidos", "")
         break
 
 
@@ -86,7 +93,6 @@ class ControladorFuncionario(AbstractControlador):
           self.__funcionarios[um_funcionario] = self.__funcionario_logado
 
           break
-
 
 
   def desloga(self):

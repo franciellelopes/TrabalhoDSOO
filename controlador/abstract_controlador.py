@@ -3,7 +3,8 @@ import os
 
 class AbstractControlador(ABC):
   def __init__(self):
-    pass
+    self.__exibe_tela = True
+    
 
   @abstractmethod
   def adiciona(self):

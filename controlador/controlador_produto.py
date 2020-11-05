@@ -6,11 +6,11 @@ class ControladorProduto(AbstractControlador):
   def __init__(self):
     self.__produtos = []
     self.__tela_produto = TelaProduto(self)
-    self.__exibe_tela = True
+
     self.__estoque = []
     self.base_dados_produto()
 
-  
+
   @property
   def produtos (self):
     return self.__produtos
@@ -26,8 +26,9 @@ class ControladorProduto(AbstractControlador):
       novo_produto = Produto(dados["codigo"],dados["nome"],dados["valor"],dados["quantidade"])
       self.__produtos.append(novo_produto)
       self.__estoque.append(novo_produto)
+      self.__tela_produto.avisos("produto_cadastrado", "")
     else:
-      self.__tela_produto.produto_ja_existe()
+      self.__tela_produto.avisos("produto_ja_cadastrado", "")
       self.adiciona()
 
 
@@ -58,7 +59,13 @@ class ControladorProduto(AbstractControlador):
 
 
   def abre_tela_inicial(self):
-    opcoes = {1: self.adiciona,2: self.remove,3: self.atualiza,4: self.lista,5: self.imprime_relatorio,0: self.finaliza_tela}
+    opcoes = {
+    1: self.adiciona,
+    2: self.remove,
+    3: self.atualiza,
+    4: self.lista,
+    5: self.imprime_relatorio,
+    0: self.finaliza_tela}
     
     self.limpa_tela()
     self.__exibe_tela = True
@@ -72,10 +79,6 @@ class ControladorProduto(AbstractControlador):
     self.limpa_tela()
     self.__exibe_tela = False
 
-
-  def atualiza_estoque(self):
-    pass
-    
 
   def imprime_relatorio(self):
     self.__tela_produto.imprime_estoque()

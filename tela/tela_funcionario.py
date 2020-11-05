@@ -7,13 +7,11 @@ class TelaFuncionario(AbstractTela):
 
 
   def dados_cadastro(self):
-    print("Digite seu nome:")
-    nome = self.verifica_palavra()
+    nome = self.verifica_palavra("Digite seu nome: ")
 
     cpf = self.le_numero_inteiro("Digite seu cpf:  ", "")
 
-    print("Digite a sua senha")
-    senha = input("")
+    senha = input("Digite a sua senha: ")
 
     return nome, cpf, senha
 
@@ -21,8 +19,7 @@ class TelaFuncionario(AbstractTela):
   def login(self):
     cpf = self.le_numero_inteiro("Digite seu cpf:  ", "")
 
-    print("Digite sua senha")
-    senha = input()
+    senha = input("Digite a sua senha: ")
 
     return cpf, senha
 
@@ -34,12 +31,10 @@ class TelaFuncionario(AbstractTela):
     
     opcao = self.le_numero_inteiro("Escolha a opcao: ", [1, 2])
     if opcao == 1:
-      print("Digite seu novo nome: ")
-      dado = self.verifica_palavra()
+      dado = self.verifica_palavra("Digite seu novo nome: ")
 
     elif opcao == 2:
-      print("Digite sua nova senha:")
-      dado = input()
+      dado = input("Digite a sua nova senha: ")
 
     return opcao, dado
 
@@ -47,10 +42,9 @@ class TelaFuncionario(AbstractTela):
   def tela_remove(self):
     cpf = self.le_numero_inteiro("Digite seu cpf:  ", "")
 
-    print("Digite sua senha:")
-    senha = input("")
+    senha = input("Digite sua senha: ")
 
-    opcao = self.confirma_tela("remover_cadastro", "")
+    opcao = self.confirma_tela("remove_cadastro", "")
 
     if opcao == 1:
       return cpf, senha
