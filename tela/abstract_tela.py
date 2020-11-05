@@ -6,6 +6,7 @@ class AbstractTela(ABC):
   def __init__():
     pass
 
+
   def le_numero_inteiro(self, mensagem: str, opcoes_validas: []):
     while True:
       valor_lido = input(mensagem)
@@ -45,58 +46,18 @@ class AbstractTela(ABC):
         print("Digite apenas letras!")
 
 
-
   @abstractmethod
   def mostra_opcoes(self):
     pass
 
-
+  @abstractmethod
   def avisos(self, opcao: str, entidade: str):
-    os.system('cls' if os.name == 'nt' else 'clear')
-    if opcao == "cadastrar":
-      print(entidade, "cadastrado com sucesso!", "\n")
-
-    elif opcao == "remover":
-      print(entidade, "removido com sucesso!", "\n")
-
-    elif opcao == "dados_invalidos":
-      print("Erro! Digite o cpf ou a senha corretamente!", "\n")
-
-    elif opcao == "finaliza":
-      print("Sistema Encerrado!")
-
-    elif opcao == "inicia":
-      print("Bem vindo a loja de brinquedos!", "\n")
-
-    elif opcao == "atualiza":
-      print(entidade, "alterado com sucesso!", "\n")
-
-    elif opcao == "usuario_ja_cadastrado":
-      print(entidade, "já cadastrado", "\n")
-
-    elif opcao == "operacao_cancelada":
-      print("Operação cancelada!", "\n")
-
-    elif opcao == "compra_finalizada":
-      print("Compra finalizada com sucesso!", "\n")
+    pass
     
-    elif opcao == "compra_cancelada":
-      print("Compra cancelada!", "\n")
 
-    elif opcao == "carrinho_vazio":
-      print("Não há produtos no carrinho!", "\n")
+  def limpa_tela(self):
+    os.system('cls' if os.name == 'nt' else 'clear')
 
-    elif opcao == "quantidade_insuficiente":
-      print("Quantidade insuficiente no estoque!")
-
-    elif opcao == "produto_ja_cadastrado":
-      print("Produto já cadastrado!", "\n")
-
-    elif opcao == "produto_adicionado":
-      print("Produto adicionado ao carrinho!", "\n")
-
-    elif opcao == "produto_cadastrado":
-      print("Produto cadastrado com sucesso!", "\n")
 
   def confirma_tela(self, entidade: str, nome: str):
     os.system('cls' if os.name == 'nt' else 'clear')

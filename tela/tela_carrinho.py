@@ -56,3 +56,22 @@ class TelaCarrinho(AbstractTela):
     codigo = self.le_numero_inteiro("Digite o codigo do produto que deseja atualizar a quantidade: ",[])
     quantidade = self.le_numero_inteiro("Digite a quantidade do produto que deseja atualizar: ", [])
     return {"codigo": codigo, "quantidade": quantidade}
+
+
+  def avisos(self, opcao: str, entidade: str):
+    self.limpa_tela()
+    
+    if opcao == "operacao_cancelada":
+      print("Operação cancelada!", "\n")
+
+    elif opcao == "compra_finalizada":
+      print("Compra finalizada com sucesso!", "\n")
+    
+    elif opcao == "compra_cancelada":
+      print("Compra cancelada!", "\n")
+
+    elif opcao == "carrinho_vazio":
+      print("Não há produtos no carrinho!", "\n")
+
+    elif opcao == "quantidade_insuficiente":
+      print("Quantidade insuficiente no estoque!")

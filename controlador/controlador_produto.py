@@ -15,6 +15,7 @@ class ControladorProduto(AbstractControlador):
   def produtos (self):
     return self.__produtos
 
+
   def adiciona(self):
     dados = self.__tela_produto.requisita_dados_cadastro()
     ja_existe = False
@@ -29,7 +30,6 @@ class ControladorProduto(AbstractControlador):
       self.__tela_produto.avisos("produto_cadastrado", "")
     else:
       self.__tela_produto.avisos("produto_ja_cadastrado", "")
-      self.adiciona()
 
 
   def remove(self):

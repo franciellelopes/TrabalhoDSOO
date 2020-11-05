@@ -64,3 +64,16 @@ class TelaProduto(AbstractTela):
     def imprime_estoque(self):
       print("------ RELATORIO DO ESTOQUE------")
       print("---------------------------------")
+
+    
+    def avisos(self, opcao: str, entidade: str):
+      self.limpa_tela()
+      
+      if opcao == "produto_ja_cadastrado":
+        print("Produto já cadastrado!", "\n")
+
+      elif opcao == "produto_adicionado":
+        print("Produto adicionado ao carrinho!", "\n")
+
+      elif opcao == "produto_cadastrado":
+        print("Produto cadastrado com sucesso!", "\n")
