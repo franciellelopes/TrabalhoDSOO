@@ -40,6 +40,7 @@ class ControladorCliente(AbstractControlador):
     for um_cliente in self.__clientes:
       if cpf == um_cliente.cpf and senha == um_cliente.senha:
           self.__cliente_logado = um_cliente
+
           self.cliente_opcoes(um_cliente.nome)
           self.limpa_tela()
           encontrou = True
@@ -140,8 +141,7 @@ class ControladorCliente(AbstractControlador):
   def lista_nota_fiscal(self):
     for nota_fiscal in self.__cliente_logado.notas_fiscais:
       self.__controlador_principal.nota_fiscal.mostra_nota()
-
-
+      
 
   def desloga(self):
     self.limpa_tela()

@@ -7,7 +7,6 @@ class ControladorCarrinho(AbstractControlador):
   def __init__(self, controlador):
     self.__controlador_principal = controlador
     self.__tela_carrinho = TelaCarrinho(self)
-    
     self.__carrinhos = []
     self.__lista_produtos_compra = []
 
@@ -40,7 +39,6 @@ class ControladorCarrinho(AbstractControlador):
 
     if not existe:
       self.__tela_carrinho.digite_codigo_valido()
-      self.adiciona() 
 
 
   def remove(self):
@@ -56,7 +54,6 @@ class ControladorCarrinho(AbstractControlador):
             break
     if not existe:
       self.__tela_carrinho.digite_codigo_valido()
-      self.remove()
 
 
   def atualiza(self):
@@ -77,7 +74,6 @@ class ControladorCarrinho(AbstractControlador):
               self.__tela_carrinho.quantidade_insuficiente()
     if not existe:
       self.__tela_carrinho.digite_codigo_valido()
-      self.atualiza()
 
 
   def limpa_carrinho(self):
