@@ -21,6 +21,9 @@ class ControladorCarrinho(AbstractControlador):
     for produto in self.__lista_produtos_compra:
       self.__tela_carrinho.mostra_produtos_adicionados(produto.codigo, produto.nome, produto.valor,produto.quantidade)
 
+    if self.__lista_produtos_compra == []:
+      self.__tela_carrinho.avisos("carrinho_vazio")
+
 
   def adiciona(self):
     dados = self.__tela_carrinho.requisita_dados_adicionar()
@@ -42,6 +45,7 @@ class ControladorCarrinho(AbstractControlador):
         if not existe:
           self.__tela_carrinho.avisos("codigo_invalido")
 
+
   def verifica_duplicidade(self, dados):
     existe = False
     duplicidade = False
@@ -59,7 +63,6 @@ class ControladorCarrinho(AbstractControlador):
               elif dados["quantidade"] == prod.quantidade + produto.quantidade:
                 prod.quantidade += produto.quantidade 
                 produto.quantidade = 0
-                self.__tela_carrinho.avisos("produto_adicionado")  
                 return duplicidade
               else:
                 self.__tela_carrinho.avisos("quantidade_insuficiente")
@@ -94,9 +97,11 @@ class ControladorCarrinho(AbstractControlador):
             if dados["quantidade"] < produto.quantidade:
               prod.quantidade += (produto.quantidade - dados["quantidade"])
               produto.quantidade = dados["quantidade"]
+              self.__tela_carrinho.avisos("atualiza_produto")
               break
             elif dados["quantidade"] == (prod.quantidade + produto.quantidade):
               prod.quantidade = dados["quantidade"] - (prod.quantidade + produto.quantidade) 
+              self.__tela_carrinho.avisos("atualiza_produto")
             else:
               self.__tela_carrinho.avisos("quantidade_insuficiente")
     if not existe:
@@ -111,7 +116,7 @@ class ControladorCarrinho(AbstractControlador):
           prod.quantidade += produto.quantidade
           
     self.__lista_produtos_compra.clear()
-    
+    self.__tela_carrinho.avisos("limpa_carrinho")
 
   def finaliza_compra(self):
     if self.__lista_produtos_compra == []:
@@ -132,10 +137,11 @@ class ControladorCarrinho(AbstractControlador):
       elif opcao == 2:
         self.__tela_carrinho.avisos("compra_cancelada")
     self.__exibe_tela = False
-
+    
 
   def finaliza_tela(self):
     self.limpa_tela()
+    self.limpa_carrinho()
     self.__exibe_tela = False
 
 

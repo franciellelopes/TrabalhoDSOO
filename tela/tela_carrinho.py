@@ -33,7 +33,7 @@ class TelaCarrinho(AbstractTela):
     print("Nome: ", nome)
     print("Valor: ", valor)
     print("Quantidade: ", quantidade)
-
+    print("-----------------------------------")
 
   def requisita_dado_remover(self):
     print("------REMOVER PRODUTO DO CARRINHO------")
@@ -68,3 +68,9 @@ class TelaCarrinho(AbstractTela):
 
     elif opcao == "codigo_invalido":
       print("Digite um codigo valido")
+
+    elif opcao == "atualiza_produto":
+      print("Produto alterado com sucesso!")
+
+    elif opcao == "limpa_carrinho":
+      print("O carrinho foi esvaziado!")
