@@ -29,6 +29,7 @@ class TelaCarrinho(AbstractTela):
 
 
   def mostra_produtos_adicionados(self, codigo: int, nome: str, valor: float, quantidade: int):
+    print("-----------------------------------")
     print("Codigo: ", codigo)
     print("Nome: ", nome)
     print("Valor: ", valor)
@@ -74,3 +75,8 @@ class TelaCarrinho(AbstractTela):
 
     elif opcao == "limpa_carrinho":
       print("O carrinho foi esvaziado!")
+    elif opcao == "produto_removido":
+      print("Produto removido", "\n")
+
+    elif opcao == "produto_adicionado":
+      print("Produto adicionado", "\n")

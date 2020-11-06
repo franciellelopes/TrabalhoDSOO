@@ -81,6 +81,7 @@ class ControladorCarrinho(AbstractControlador):
           if prod.codigo == produto.codigo:
             prod.quantidade += produto.quantidade
             self.__lista_produtos_compra.remove(produto)
+            self.__tela_carrinho.avisos("produto_removido")
             break
     if not existe:
       self.__tela_carrinho.avisos("codigo_invalido")
