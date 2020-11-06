@@ -84,22 +84,20 @@ class TelaCliente(AbstractTela):
     opcao = self.le_numero_inteiro("Escolha a opcao: ", [1, 2, 0])
     return opcao
 
-  def avisos(self, opcao: str, entidade: str):
+  def avisos(self, opcao: str):
     self.limpa_tela()
     
     if opcao == "cadastrar":
-      print(entidade, "cadastrado com sucesso!", "\n")
+      print("Cliente cadastrado com sucesso!", "\n")
 
     elif opcao == "remover":
-      print(entidade, "removido com sucesso!", "\n")
+      print("Cliente removido com sucesso!", "\n")
 
     elif opcao == "dados_invalidos":
       print("Erro! Digite o cpf ou a senha corretamente!", "\n")
 
     elif opcao == "atualiza":
-      print(entidade, "alterado com sucesso!", "\n")
+      print("Cliente alterado com sucesso!", "\n")
 
     elif opcao == "usuario_ja_cadastrado":
-      print(entidade, "já cadastrado", "\n")
-
-
+      print("Cliente já cadastrado", "\n")

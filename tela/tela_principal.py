@@ -15,7 +15,7 @@ class TelaPrincipal(AbstractTela):
     opcao = self.le_numero_inteiro("Escolha a opção: ", [1, 2, 0])
     return opcao
 
-  def avisos(self, opcao: str, entidade: str):
+  def avisos(self, opcao: str):
     self.limpa_tela()
 
     if opcao == "inicia":

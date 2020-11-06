@@ -29,7 +29,7 @@ class ControladorFuncionario(AbstractControlador):
 
     if not encontrou:
       self.limpa_tela()
-      self.__tela_funcionario.avisos("dados_invalidos", "")
+      self.__tela_funcionario.avisos("dados_invalidos")
 
 
   def adiciona(self):
@@ -37,12 +37,12 @@ class ControladorFuncionario(AbstractControlador):
     self.limpa_tela()
     for um_funcionario in self.__funcionarios:
       if cpf == um_funcionario.cpf:
-        self.__tela_funcionario.avisos("usuario_ja_cadastrado", "Funcionario")
+        self.__tela_funcionario.avisos("usuario_ja_cadastrado")
         break
       else:
         um_funcionario = Funcionario(nome, cpf, senha)
         self.__funcionarios.append(um_funcionario)
-        self.__tela_funcionario.avisos("cadastrar", "Funcionário")
+        self.__tela_funcionario.avisos("cadastrar")
         break
     
 
@@ -52,16 +52,16 @@ class ControladorFuncionario(AbstractControlador):
 
       if cpf == um_funcionario.cpf and senha == um_funcionario.senha:
         self.__funcionarios.remove(um_funcionario)
-        self.__tela_funcionario.avisos("remover", "Funcionario")
+        self.__tela_funcionario.avisos("remover")
         self.__log_funcionario = False
         break
 
       elif cpf == 0 and senha == 0:
-        self.__tela_funcionario.avisos("operacao_cancelada", "")
+        self.__tela_funcionario.avisos("operacao_cancelada")
         break
 
       elif cpf != um_funcionario.cpf or senha != um_funcionario.senha:
-        self.__tela_funcionario.avisos("dados_invalidos", "")
+        self.__tela_funcionario.avisos("dados_invalidos")
         break
 
 
@@ -83,10 +83,10 @@ class ControladorFuncionario(AbstractControlador):
     self.limpa_tela()
     if opcao == 1:
       self.__funcionario_logado.nome = dado
-      self.__tela_funcionario.avisos("atualiza", "Nome")
+      self.__tela_funcionario.avisos("atualiza")
     elif opcao == 2:
       self.__funcionario_logado.senha = dado
-      self.__tela_funcionario.avisos("atualiza", "Senha")
+      self.__tela_funcionario.avisos("atualiza")
 
     for um_funcionario in self.__funcionarios:
       if self.__funcionario_logado.cpf == um_funcionario:

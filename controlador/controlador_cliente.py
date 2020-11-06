@@ -2,8 +2,6 @@ from controlador.abstract_controlador import AbstractControlador
 from entidade.cliente import Cliente
 from tela.tela_cliente import TelaCliente
 
-
-
 class ControladorCliente(AbstractControlador):
   def __init__(self, controlador):
     self.__clientes = []
@@ -47,19 +45,19 @@ class ControladorCliente(AbstractControlador):
           break
         
     if not encontrou:
-      self.__tela_cliente.avisos("dados_invalidos", "")
+      self.__tela_cliente.avisos("dados_invalidos")
 
 
   def adiciona(self):
     nome, cpf, senha = self.__tela_cliente.dados_cadastro()
     for cliente in self.__clientes:
       if cliente.cpf == cpf:
-        self.__tela_cliente.avisos("usuario_ja_cadastrado", "Cliente")
+        self.__tela_cliente.avisos("usuario_ja_cadastrado")
         break
       else:
         cliente = Cliente(nome, cpf, senha)
         self.__clientes.append(cliente)
-        self.__tela_cliente.avisos("cadastrar", "Cliente")
+        self.__tela_cliente.avisos("cadastrar")
         break
 
 
@@ -106,10 +104,10 @@ class ControladorCliente(AbstractControlador):
     self.limpa_tela()
     if opcao == 1:
         self.__cliente_logado.nome = dado
-        self.__tela_cliente.avisos("atualiza", "Nome")
+        self.__tela_cliente.avisos("atualiza")
     elif opcao == 2:
         self.__cliente_logado.senha = dado
-        self.__tela_cliente.avisos("atualiza", "Senha")
+        self.__tela_cliente.avisos("atualiza")
 
     for um_cliente in self.__clientes:
         if self.__cliente_logado.cpf == um_cliente:
@@ -125,22 +123,23 @@ class ControladorCliente(AbstractControlador):
         self.limpa_tela()
         self.__clientes.remove(um_cliente)
         
-        self.__tela_cliente.avisos("remover", "cliente")
+        self.__tela_cliente.avisos("remover")
         self.__log_cliente = False
         break
 
       elif cpf == 0 and senha == 0:
-        self.__tela_cliente.avisos("operacao_cancelada", "")
+        self.__tela_cliente.avisos("operacao_cancelada")
         break
 
       elif cpf != um_cliente.cpf or senha != um_cliente.senha:
-        self.__tela_cliente.avisos("dados_invalidos", "")
+        self.__tela_cliente.avisos("dados_invalidos")
         break
 
 
   def lista_nota_fiscal(self):
+    self.limpa_tela()
     for nota_fiscal in self.__cliente_logado.notas_fiscais:
-      self.__controlador_principal.nota_fiscal.mostra_nota()
+      nota_fiscal.relatorio_compras()
       
 
   def desloga(self):

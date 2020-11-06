@@ -4,8 +4,6 @@ from controlador.controlador_produto import ControladorProduto
 from controlador.controlador_carrinho import ControladorCarrinho
 
 from tela.tela_principal import TelaPrincipal
-from tela.nota_fiscal import NotaFiscal
-
 
 class ControladorPrincipal():
   def __init__(self):
@@ -14,7 +12,6 @@ class ControladorPrincipal():
     self.__controlador_produto = ControladorProduto()
     self.__controlador_carrinho = ControladorCarrinho(self)
 
-    self.__nota_fiscal = NotaFiscal()
     self.__tela_principal = TelaPrincipal(self)
     self.__exibe_tela = True
 
@@ -35,7 +32,7 @@ class ControladorPrincipal():
 
 
   def inicia(self):
-    self.__tela_principal.avisos("inicia", "")
+    self.__tela_principal.avisos("inicia")
     self.abre_tela_inicial()
 
 
@@ -55,10 +52,8 @@ class ControladorPrincipal():
     self.__controlador_carrinho.abre_tela_inicial()
     
 
-  def gera_nota_fiscal(self, produtos):
-    nota_fiscal = NotaFiscal()
+  def adiciona_nf_cliente(self, nota_fiscal):
     self.__controlador_cliente.cliente_logado.notas_fiscais.append(nota_fiscal)
-    nota_fiscal.relatorio_compras(produtos)
 
 
   def abre_tela_inicial(self):
@@ -75,6 +70,7 @@ class ControladorPrincipal():
 
       funcao_escolhida()
 
+
   def fecha_sistema(self):
     self.__exibe_tela = False
-    self.__tela_principal.avisos("finaliza", "")
+    self.__tela_principal.avisos("finaliza")

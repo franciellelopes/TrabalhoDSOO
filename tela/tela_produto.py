@@ -11,10 +11,9 @@ class TelaProduto(AbstractTela):
       print("2 - Remover Produto")
       print("3 - Atualizar Produto")
       print("4 - Listar Produtos")
-      print("5 - Imprimir Relatório de Estoque")
       print("0 - Voltar")
     
-      opcao = self.le_numero_inteiro("Escolha a opcao: ", [1,2,3,4,5,0])
+      opcao = self.le_numero_inteiro("Escolha a opcao: ", [1,2,3,4,0])
       return opcao
 
 
@@ -52,7 +51,6 @@ class TelaProduto(AbstractTela):
 
 
     def atualiza_produto(self):
-
       nome = self.verifica_palavra("Digite o novo nome: ")
 
       valor = self.verifica_float("Digite o novo valor: ")
@@ -61,12 +59,7 @@ class TelaProduto(AbstractTela):
       return {"nome": nome, "valor": valor, "quantidade": quantidade}
 
 
-    def imprime_estoque(self):
-      print("------ RELATORIO DO ESTOQUE------")
-      print("---------------------------------")
-
-    
-    def avisos(self, opcao: str, entidade: str):
+    def avisos(self, opcao: str):
       self.limpa_tela()
       
       if opcao == "produto_ja_cadastrado":
@@ -77,3 +70,10 @@ class TelaProduto(AbstractTela):
 
       elif opcao == "produto_cadastrado":
         print("Produto cadastrado com sucesso!", "\n")
+
+      elif opcao == "atualiza_produto":
+        print("Produto alterado com sucesso!")
+      elif opcao == "remove_produto":
+        print("Produto removido do estoque!")
+      elif opcao == "codigo_invalido":
+        print("Digite um código válido!")

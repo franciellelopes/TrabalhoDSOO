@@ -67,6 +67,4 @@ class TelaCarrinho(AbstractTela):
       print("Quantidade insuficiente no estoque!")
 
     elif opcao == "codigo_invalido":
-      print("---------------------------------------")
       print("Digite um codigo valido")
-      print("---------------------------------------")

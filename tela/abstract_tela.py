@@ -52,7 +52,7 @@ class AbstractTela(ABC):
 
 
   @abstractmethod
-  def avisos(self, opcao: str, entidade: str):
+  def avisos(self, opcao: str):
     pass
     
 

@@ -27,9 +27,9 @@ class ControladorProduto(AbstractControlador):
       novo_produto = Produto(dados["codigo"],dados["nome"],dados["valor"],dados["quantidade"])
       self.__produtos.append(novo_produto)
       self.__estoque.append(novo_produto)
-      self.__tela_produto.avisos("produto_cadastrado", "")
+      self.__tela_produto.avisos("produto_cadastrado")
     else:
-      self.__tela_produto.avisos("produto_ja_cadastrado", "")
+      self.__tela_produto.avisos("produto_ja_cadastrado")
 
 
   def remove(self):
@@ -38,8 +38,10 @@ class ControladorProduto(AbstractControlador):
       if produto.codigo == codigo:
         produto_remover = (produto)
         self.__produtos.remove(produto_remover)
+        self.__tela_produto.avisos("produto_removido")
         break
-
+      else:
+        self.__tela_produto.avisos("codigo_invalido")
 
   def atualiza(self):
     codigo = self.__tela_produto.requisita_dado_atualizar()
@@ -50,10 +52,14 @@ class ControladorProduto(AbstractControlador):
         produto.valor = dados["valor"]
         produto.quantidade = dados["quantidade"]
         self.__estoque.append(produto)
+        self.__tela_produto.avisos("atualiza_produto")
         break
+      else:
+        self.__tela_produto.avisos("codigo_invalido")
 
 
   def lista(self):
+    self.limpa_tela()
     for produto in self.__produtos:
       self.__tela_produto.mostra_dados_cadastrados(produto.codigo,produto.nome, produto.valor, produto.quantidade)
 
@@ -64,7 +70,6 @@ class ControladorProduto(AbstractControlador):
     2: self.remove,
     3: self.atualiza,
     4: self.lista,
-    5: self.imprime_relatorio,
     0: self.finaliza_tela}
     
     self.limpa_tela()
@@ -80,15 +85,12 @@ class ControladorProduto(AbstractControlador):
     self.__exibe_tela = False
 
 
-  def imprime_relatorio(self):
-    self.__tela_produto.imprime_estoque()
-    for produto in self.__estoque:
-      self.__tela_produto.mostra_dados_cadastrados(produto.codigo,produto.nome, produto.valor, produto.quantidade)
-  
-
   def base_dados_produto(self):
-    produto = Produto(123, "Carrinho", 50, 3)
+    produto = Produto(101, "Carrinho", 50, 3)
     self.__produtos.append(produto)
 
-    produto = Produto(456, "Boneca", 30, 5)
+    produto = Produto(102, "Boneca", 30, 5)
+    self.__produtos.append(produto)
+
+    produto = Produto(103, "Urso de pelúcia", 25, 5)
     self.__produtos.append(produto)
