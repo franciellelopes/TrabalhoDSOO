@@ -12,7 +12,11 @@ class ControladorCliente(AbstractControlador):
     self.__log_cliente = True
 
     self.base_dados_cliente()
-      
+
+  def lista_clientes(self):
+    self.limpa_tela()
+    for cliente in self.__clientes:
+      self.__tela_cliente.mostra_clientes(cliente.nome, cliente.cpf) 
 
   def abre_tela_inicial(self):
     lista_opcoes = {

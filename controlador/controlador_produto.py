@@ -1,20 +1,17 @@
 from tela.tela_produto import TelaProduto
 from entidade.produto import Produto
 from controlador.abstract_controlador import AbstractControlador
+
 class ControladorProduto(AbstractControlador):
 
   def __init__(self):
     self.__produtos = []
     self.__tela_produto = TelaProduto(self)
-
-    self.__estoque = []
     self.base_dados_produto()
-
 
   @property
   def produtos (self):
     return self.__produtos
-
 
   def adiciona(self):
     dados = self.__tela_produto.requisita_dados_cadastro()
@@ -26,7 +23,6 @@ class ControladorProduto(AbstractControlador):
     if not ja_existe:
       novo_produto = Produto(dados["codigo"],dados["nome"],dados["valor"],dados["quantidade"])
       self.__produtos.append(novo_produto)
-      self.__estoque.append(novo_produto)
       self.__tela_produto.avisos("produto_cadastrado")
     else:
       self.__tela_produto.avisos("produto_ja_cadastrado")
@@ -44,18 +40,19 @@ class ControladorProduto(AbstractControlador):
         self.__tela_produto.avisos("codigo_invalido")
 
   def atualiza(self):
+    existe = False
     codigo = self.__tela_produto.requisita_dado_atualizar()
     for produto in self.__produtos:
-      if produto.codigo == codigo: 
+      if produto.codigo == codigo:
+        existe = True
         dados = self.__tela_produto.atualiza_produto()
         produto.nome = dados["nome"]
         produto.valor = dados["valor"]
         produto.quantidade = dados["quantidade"]
-        self.__estoque.append(produto)
         self.__tela_produto.avisos("atualiza_produto")
         break
-      else:
-        self.__tela_produto.avisos("codigo_invalido")
+    if not existe:
+      self.__tela_produto.avisos("codigo_invalido")
 
 
   def lista(self):
@@ -63,7 +60,7 @@ class ControladorProduto(AbstractControlador):
     for produto in self.__produtos:
       self.__tela_produto.mostra_dados_cadastrados(produto.codigo,produto.nome, produto.valor, produto.quantidade)
 
-
+  
   def abre_tela_inicial(self):
     opcoes = {
     1: self.adiciona,
@@ -78,13 +75,11 @@ class ControladorProduto(AbstractControlador):
       opcao = self.__tela_produto.mostra_opcoes()
       funcao = opcoes[opcao]
       funcao()
- 
 
   def finaliza_tela(self):
     self.limpa_tela()
     self.__exibe_tela = False
-
-
+ 
   def base_dados_produto(self):
     produto = Produto(101, "Carrinho", 50, 3)
     self.__produtos.append(produto)

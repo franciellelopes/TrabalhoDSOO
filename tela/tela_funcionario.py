@@ -77,9 +77,10 @@ class TelaFuncionario(AbstractTela):
     print("Como funcionário você deseja:")
     print("1 - Logar")
     print("2 - Cadastrar")
+    print("3 - Listar Clientes")
     print("0 - Voltar")
 
-    opcao = self.le_numero_inteiro("Escolha a opcao: ", [1, 2, 0])
+    opcao = self.le_numero_inteiro("Escolha a opcao: ", [1, 2, 3, 0])
     return opcao
 
 

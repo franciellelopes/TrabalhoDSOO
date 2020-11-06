@@ -123,7 +123,8 @@ class ControladorFuncionario(AbstractControlador):
   def abre_tela_inicial(self):
     lista_opcoes = {
     1: self.login_funcionario,
-    2: self.adiciona, 
+    2: self.adiciona,
+    3: self.lista_clientes, 
     0: self.finaliza_tela}
 
     self.limpa_tela()

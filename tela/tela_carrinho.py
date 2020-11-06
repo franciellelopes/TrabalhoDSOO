@@ -48,7 +48,7 @@ class TelaCarrinho(AbstractTela):
     return {"codigo": codigo, "quantidade": quantidade}
 
 
-  def avisos(self, opcao: str, entidade: str):
+  def avisos(self, opcao: str):
     self.limpa_tela()
     
     if opcao == "operacao_cancelada":

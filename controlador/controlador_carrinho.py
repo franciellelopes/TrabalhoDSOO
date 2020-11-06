@@ -23,36 +23,50 @@ class ControladorCarrinho(AbstractControlador):
 
 
   def adiciona(self):
-    existe = False
-    produto_dentro_carrinho = False
     dados = self.__tela_carrinho.requisita_dados_adicionar()
-    for produto in self.__controlador_principal.controlador_produto.produtos:
-
-      for produto_carrinho in self.__lista_produtos_compra:
-        #print(produto.codigo, produto_dentro_carrinho.codigo)
-        if produto.codigo == produto_carrinho.codigo:
-          produto_dentro_carrinho = True
-          if produto.quantidade > 0:
-            produto_carrinho.quantidade += 1
-            produto.quantidade -= 1
-            produto_dentro_carrinho = True
+    verifica = self.verifica_duplicidade(dados)
+    if not verifica:
+      existe = False
+      for produto in self.__controlador_principal.controlador_produto.produtos:
+        if produto.codigo == dados["codigo"]:
+          existe = True
+          if dados["quantidade"] <= produto.quantidade:
+            produto_novo = Produto(produto.codigo, produto.nome, produto.valor,dados["quantidade"])
+            produto.quantidade -= dados["quantidade"]
+            self.__lista_produtos_compra.append(produto_novo)
             self.__tela_carrinho.avisos("produto_adicionado")  
-        #break
-      print(produto.codigo, dados["codigo"])
-      if produto.codigo == dados["codigo"]:
-        existe = True
-        if dados["quantidade"] <= produto.quantidade and produto_dentro_carrinho == False:
-          produto_novo = Produto(produto.codigo, produto.nome, produto.valor,dados["quantidade"])
-          produto.quantidade -= dados["quantidade"]
-          self.__lista_produtos_compra.append(produto_novo)
-          self.__tela_carrinho.avisos("produto_adicionado")  
-          break
-        elif produto.quantidade < 0:
-          self.__tela_carrinho.avisos("quantidade_insuficiente")
+            break
+          else:
+            self.__tela_carrinho.avisos("quantidade_insuficiente")
 
-      elif not existe:
-        self.__tela_carrinho.avisos("codigo_invalido")
+        if not existe:
+          self.__tela_carrinho.avisos("codigo_invalido")
 
+  def verifica_duplicidade(self, dados):
+    existe = False
+    duplicidade = False
+    for produto in self.__controlador_principal.controlador_produto.produtos:
+        if produto.codigo == dados["codigo"]:
+          existe = True
+          for prod in self.__lista_produtos_compra:
+            if prod.codigo == dados["codigo"]:
+              duplicidade = True
+              if dados["quantidade"] <= produto.quantidade:
+                prod.quantidade += dados["quantidade"]
+                produto.quantidade -= dados["quantidade"]
+                self.__tela_carrinho.avisos("produto_adicionado")  
+                return duplicidade
+              elif dados["quantidade"] == prod.quantidade + produto.quantidade:
+                prod.quantidade += produto.quantidade 
+                produto.quantidade = 0
+                self.__tela_carrinho.avisos("produto_adicionado")  
+                return duplicidade
+              else:
+                self.__tela_carrinho.avisos("quantidade_insuficiente")
+
+        if not existe:
+          self.__tela_carrinho.avisos("codigo_invalido")
+    
 
   def remove(self):
     existe = False
@@ -66,7 +80,7 @@ class ControladorCarrinho(AbstractControlador):
             self.__lista_produtos_compra.remove(produto)
             break
     if not existe:
-      self.__tela_carrinho.digite_codigo_valido()
+      self.__tela_carrinho.avisos("codigo_invalido")
 
 
   def atualiza(self):
@@ -84,9 +98,9 @@ class ControladorCarrinho(AbstractControlador):
             elif dados["quantidade"] == (prod.quantidade + produto.quantidade):
               prod.quantidade = dados["quantidade"] - (prod.quantidade + produto.quantidade) 
             else:
-              self.__tela_carrinho.quantidade_insuficiente()
+              self.__tela_carrinho.avisos("quantidade_insuficiente")
     if not existe:
-      self.__tela_carrinho.digite_codigo_valido()
+      self.__tela_carrinho.avisos("codigo_invalido")
 
 
   def limpa_carrinho(self):
