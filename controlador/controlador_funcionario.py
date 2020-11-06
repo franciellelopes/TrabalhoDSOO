@@ -14,7 +14,9 @@ class ControladorFuncionario(AbstractControlador):
     self.__log_funcionario = False
     self.base_dados_funcionario()
 
-
+  def lista_clientes(self):
+    self.__controlador_principal.controlador_cliente.lista_clientes()
+    
   def login_funcionario(self):
     cpf, senha = self.__tela_funcionario.login()
     encontrou = False

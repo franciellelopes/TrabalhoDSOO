@@ -3,7 +3,12 @@ from tela.abstract_tela import AbstractTela
 class TelaCliente(AbstractTela):
   def __init__(self):
     pass
-
+    
+  def mostra_clientes(self,nome, cpf):
+    print("--------------------------------------------")
+    print("Nome:", nome.lower().capitalize())
+    print("CPF:", cpf)
+    print("--------------------------------------------")
 
   def dados_cadastro(self):
     nome = self.verifica_palavra("Digite seu nome: ")
