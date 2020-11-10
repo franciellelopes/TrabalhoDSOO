@@ -66,9 +66,10 @@ class TelaFuncionario(AbstractTela):
     print("2 - Ver Cadastro")
     print("3 - Alterar Cadastro")
     print("4 - Remover Cadastro")
+    print("5 - Listar Clientes")
     print("0 - Sair")
 
-    opcao = self.le_numero_inteiro("Escolha a opcao: ", [1, 2, 3, 4, 0])
+    opcao = self.le_numero_inteiro("Escolha a opcao: ", [1, 2, 3, 4, 5, 0])
 
     return opcao
 
@@ -77,25 +78,21 @@ class TelaFuncionario(AbstractTela):
     print("Como funcionário você deseja:")
     print("1 - Logar")
     print("2 - Cadastrar")
-    print("3 - Listar Clientes")
     print("0 - Voltar")
 
-    opcao = self.le_numero_inteiro("Escolha a opcao: ", [1, 2, 3, 0])
+    opcao = self.le_numero_inteiro("Escolha a opcao: ", [1, 2, 0])
     return opcao
 
 
   def avisos(self, opcao: str):
-    if opcao == "cadastrar":
-      print("Funcionário cadastrado com sucesso!", "\n")
+    self.limpa_tela()
+    dicionario = {
+    "cadastrar": "Funcionário cadastrado com sucesso!",
+    "remover": "Funcionário removido com sucesso!",
+    "dados_invalidos": "Erro! Digite o cpf ou a senha corretamente!",
+    "atualiza": "Funcionário alterado com sucesso!",
+    "usuario_ja_cadastrado": "Funcionário já cadastrado",
+    "operacao_cancelada": "Operação Cancelada"}
 
-    elif opcao == "remover":
-      print("Funcionário removido com sucesso!", "\n")
-
-    elif opcao == "dados_invalidos":
-      print("Erro! Digite o cpf ou a senha corretamente!", "\n")
-
-    elif opcao == "atualiza":
-      print("Funcionário alterado com sucesso!", "\n")
-
-    elif opcao == "usuario_ja_cadastrado":
-      print("Funcionário já cadastrado", "\n")
+    print("")
+    print(dicionario[opcao])

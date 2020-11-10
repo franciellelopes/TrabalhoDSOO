@@ -9,9 +9,11 @@ class ControladorProduto(AbstractControlador):
     self.__tela_produto = TelaProduto(self)
     self.base_dados_produto()
 
+
   @property
   def produtos (self):
     return self.__produtos
+
 
   def adiciona(self):
     dados = self.__tela_produto.requisita_dados_cadastro()
@@ -39,19 +41,21 @@ class ControladorProduto(AbstractControlador):
       else:
         self.__tela_produto.avisos("codigo_invalido")
 
+
   def atualiza(self):
     existe = False
     codigo = self.__tela_produto.requisita_dado_atualizar()
     for produto in self.__produtos:
       if produto.codigo == codigo:
         existe = True
-        dados = self.__tela_produto.atualiza_produto()
-        produto.nome = dados["nome"]
-        produto.valor = dados["valor"]
-        produto.quantidade = dados["quantidade"]
-        self.__tela_produto.avisos("atualiza_produto")
-        break
-    if not existe:
+
+    if existe:      
+      dados = self.__tela_produto.atualiza_produto()
+      produto.nome = dados["nome"]
+      produto.valor = dados["valor"]
+      produto.quantidade = dados["quantidade"]
+      self.__tela_produto.avisos("atualiza_produto")
+    else:
       self.__tela_produto.avisos("codigo_invalido")
 
 

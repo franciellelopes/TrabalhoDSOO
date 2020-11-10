@@ -38,7 +38,7 @@ class TelaCliente(AbstractTela):
     if opcao == 1:
       return cpf, senha
     elif opcao == 2:
-      return 0, 0
+      return 0, -1
 
 
   def tela_atualiza_cadastro(self):
@@ -55,6 +55,8 @@ class TelaCliente(AbstractTela):
     elif opcao == 2:
       dado = input("Digite sua nova senha: ")
 
+    elif opcao == 0:
+      dado = 0
     return opcao, dado
     
 
@@ -90,19 +92,15 @@ class TelaCliente(AbstractTela):
     return opcao
 
   def avisos(self, opcao: str):
+    dicionario = {
+    "cadastrar": "Cliente cadastrado com sucesso!",
+    "remover": "Cliente removido com sucesso!",
+    "dados_invalidos": "Erro! Digite o cpf ou a senha corretamente!",
+    "atualiza": "Cliente alterado com sucesso!",
+    "usuario_ja_cadastrado": "Cliente já cadastrado",
+    "operacao_cancelada": "Operação Cancelada"}
     self.limpa_tela()
     
-    if opcao == "cadastrar":
-      print("Cliente cadastrado com sucesso!", "\n")
+    print(dicionario[opcao])
 
-    elif opcao == "remover":
-      print("Cliente removido com sucesso!", "\n")
-
-    elif opcao == "dados_invalidos":
-      print("Erro! Digite o cpf ou a senha corretamente!", "\n")
-
-    elif opcao == "atualiza":
-      print("Cliente alterado com sucesso!", "\n")
-
-    elif opcao == "usuario_ja_cadastrado":
-      print("Cliente já cadastrado", "\n")
+    #fazer dicionário
